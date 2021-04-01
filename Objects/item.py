@@ -26,7 +26,7 @@ class Item:
     def print_details(self):
         print("Name: " + self.name)
         print("Price: " + str (self.price))
-        print("Quantity: " + str (self.quantity))
+        print("Quantity: " + str (self.quanitity))
         print("PLU Number: " + str (self.pluNumber))
         print("Item Type: " + self.itemType)
         print("Category: " + self.category)

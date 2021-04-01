@@ -6,6 +6,7 @@ from Objects.staff import Staff
 
 from Functions.checkout import checkout
 from GUI.add_item_window import add_item_window
+from GUI.show_buttons_window import show_buttons_window
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -40,31 +41,64 @@ itemList.append(item4)
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
+
+        self.grid = Gtk.Grid()
+
         self.list_of_items = itemList
-        self.Box_For_Buttons = Gtk.Box()
+
+
+        self.Box_For_Item_Buttons = Gtk.Box()
+        
+        
+        self.Box_For_Special_Buttons = Gtk.Box()
+
+        self.list_box = Gtk.ListBox()
+        lbl = Gtk.Label(label = "Current Basket")
+        self.list_box.prepend(lbl)
+        
+
         self.intialise_buttons()
-        self.add(self.Box_For_Buttons)
+
+        self.grid.add(self.Box_For_Item_Buttons)
+
+        self.grid.add(self.Box_For_Special_Buttons )
+
+        self.grid.add(self.list_box)
+
+        self.add(self.grid)
+
 
     def intialise_buttons(self):
         for item in itemList:
             button = Gtk.Button(label = item.name)
             button.connect("clicked", self.add_to_total, item)
-            self.Box_For_Buttons.pack_start(button, True, True, 0)
+            self.Box_For_Item_Buttons.pack_start(button, True, True, 0)
 
-
+        self.initalise_modify_button()
         self.initalise_add_item_button()
         self.initalise_checkout_button()
 
+    def initalise_modify_button(self):
+        modify_button = Gtk.Button(label = "Modify Item")
+        modify_button.connect("clicked", self.modify_button_handler)
+        self.Box_For_Special_Buttons.add(modify_button)
+        self.show_all()
 
     def initalise_checkout_button(self):
         checkout_button = Gtk.Button(label = "Checkout")
         checkout_button.connect("clicked", self.checkout_handler)
-        self.Box_For_Buttons.pack_start(checkout_button, True, True, 0)
+        self.Box_For_Special_Buttons.pack_start(checkout_button, True, True, 0)
 
     def initalise_add_item_button(self):
         add_item_button = Gtk.Button(label = "Add New Item")
         add_item_button.connect("clicked", self.add_new_item_handler)
-        self.Box_For_Buttons.pack_start(add_item_button, True, True, 0)
+        self.Box_For_Special_Buttons.pack_start(add_item_button, True, True, 0)
+
+    def modify_button_handler(self, button_event):
+        self.modify_window = show_buttons_window(self)
+        self.modify_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
+        self.modify_window.show_all()
 
     def add_new_item_handler(self, button_event):
     
@@ -76,24 +110,42 @@ class mainWindow(Gtk.Window):
 
         print(self.list_of_items)
 
+    def set_new_item(self,item):
+        print("Yolo")
+        item.print_details()
 
     def render_buttons(self):
         new_item = self.list_of_items[len(self.list_of_items) - 1]
         new_button = Gtk.Button(label = new_item.name)
         new_button.connect("clicked", self.add_to_total, new_item )
 
-        self.Box_For_Buttons.pack_start(new_button, True, True, 0)
+        self.Box_For_Item_Buttons.pack_start(new_button, True, True, 0)
         self.show_all()
         self.add_item_window.destroy()
         
 
     def checkout_handler(self, button_event):
         checkout(current_basket)
+        self.clear_list_box()
         current_basket.clear()
+
+    def clear_list_box(self):
+        for item in self.list_box:
+            self.list_box.remove(item)
+        
+        label = Gtk.Label(label = "Current Basket:")
+        self.list_box.add(label)
+        self.show_all()
+
+    def add_to_list_box(self, item_to_be_added):
+        label = Gtk.Label(item_to_be_added )
+        self.list_box.insert(label, -1)
+        self.show_all()
 
     def add_to_total(self, button_event, item):
         current_basket.append(item)
-
+        item_details = str(item.price) + "  " + item.name
+        self.add_to_list_box(item_details)
         print(item.name)
         print(item.price)
 
