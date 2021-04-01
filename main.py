@@ -5,6 +5,7 @@ from Objects.item import Item
 from Objects.staff import Staff
 
 from Functions.checkout import checkout
+from GUI.add_item_window import add_item_window
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -22,6 +23,8 @@ item2 = Item("Sprite", 1.09, 30, 1000002, "Drink", "Soft Drink")
 item3 = Item("Red Bull", 1.59, 4, 1000003, "Drink", "Energy Drink")
 item4 = Item("Mars Bar", 0.79, 12, 100004, "Food", "Candy")
 
+current_basket = []
+
 staffList = []
 staffList.append(staff1)
 staffList.append(staff2)
@@ -37,6 +40,7 @@ itemList.append(item4)
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
+        self.list_of_items = itemList
         self.Box_For_Buttons = Gtk.Box()
         self.intialise_buttons()
         self.add(self.Box_For_Buttons)
@@ -47,14 +51,49 @@ class mainWindow(Gtk.Window):
             button.connect("clicked", self.add_to_total, item)
             self.Box_For_Buttons.pack_start(button, True, True, 0)
 
+
+        self.initalise_add_item_button()
+        self.initalise_checkout_button()
+
+
+    def initalise_checkout_button(self):
         checkout_button = Gtk.Button(label = "Checkout")
-        checkout_button.connect("clicked", self.checkout)
+        checkout_button.connect("clicked", self.checkout_handler)
         self.Box_For_Buttons.pack_start(checkout_button, True, True, 0)
 
-    def checkout(self, button_event):
-        checkout(itemList)
+    def initalise_add_item_button(self):
+        add_item_button = Gtk.Button(label = "Add New Item")
+        add_item_button.connect("clicked", self.add_new_item_handler)
+        self.Box_For_Buttons.pack_start(add_item_button, True, True, 0)
+
+    def add_new_item_handler(self, button_event):
+    
+        self.add_item_window = add_item_window(self, itemList)
+
+        self.add_item_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
+        self.add_item_window.show_all()
+
+        print(self.list_of_items)
+
+
+    def render_buttons(self):
+        new_item = self.list_of_items[len(self.list_of_items) - 1]
+        new_button = Gtk.Button(label = new_item.name)
+        new_button.connect("clicked", self.add_to_total, new_item )
+
+        self.Box_For_Buttons.pack_start(new_button, True, True, 0)
+        self.show_all()
+        self.add_item_window.destroy()
+        
+
+    def checkout_handler(self, button_event):
+        checkout(current_basket)
+        current_basket.clear()
 
     def add_to_total(self, button_event, item):
+        current_basket.append(item)
+
         print(item.name)
         print(item.price)
 
