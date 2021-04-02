@@ -8,6 +8,13 @@ class Item:
         self.itemType = itemType
         self.category = category
 
+    def update(self, new_item):
+            self.change_name(new_item.name)
+            self.change_price(new_item.price)
+            self.change_pluNumber(new_item.pluNumber)
+            self.change_itemType(new_item.itemType)
+            self.change_category(new_item.category)
+
     def change_name(self, new_name):
         self.name = new_name
 

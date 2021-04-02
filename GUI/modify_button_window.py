@@ -63,7 +63,9 @@ class modify_button_window(Gtk.Window):
         new_category = self.item_type_category_entry.get_text()
 
         new_item = Item(new_name, new_price, new_quantity, new_plu_number, new_item_type, new_category)
+        
+        item.update(new_item)
 
-        parent.set_new_item(item, new_item)
+        #parent.set_new_item(item, new_item)
 
         self.destroy()
