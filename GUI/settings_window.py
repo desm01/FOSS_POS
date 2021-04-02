@@ -1,10 +1,8 @@
 import gi
 gi.require_version("Gtk", "3.0")
-import sys
-import os
-sys.path.append(os.path.abspath('./Objects'))
-import item as Item
-import staff as Staff
+
+from Objects.item import Item
+from Objects.staff import Staff
 
 from gi.repository import Gtk
 

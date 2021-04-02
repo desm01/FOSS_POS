@@ -1,9 +1,7 @@
 import gi
 gi.require_version("Gtk", "3.0")
-import sys
-import os
-sys.path.append(os.path.abspath('./Objects'))
-import item as Item
+
+from Objects.item import Item
 
 from gi.repository import Gtk
 

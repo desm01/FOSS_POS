@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.abspath('./Objects'))
-import item as Item
+from Objects.item import Item
 
 from GUI.MessageBoxes.checkout_window import checkout_window
 

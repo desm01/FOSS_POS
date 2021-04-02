@@ -1,9 +1,7 @@
 import gi
 gi.require_version("Gtk", "3.0")
-import sys
-import os
-sys.path.append(os.path.abspath('./Objects'))
-import staff as Staff
+
+from Objects.staff import Staff
 
 from GUI.passcode_screen import passcode_screen
 
