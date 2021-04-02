@@ -56,10 +56,13 @@ class mainWindow(Gtk.Window):
         
         self.Box_For_Special_Buttons = Gtk.Box()
 
+        self.Box_For_Total = Gtk.Box()
+        
         self.list_box = Gtk.ListBox()
         lbl = Gtk.Label(label = "Current Basket")
         self.list_box.prepend(lbl)
         
+        self.Box_For_Total.add(self.list_box)
 
         self.intialise_buttons()
 
@@ -67,7 +70,7 @@ class mainWindow(Gtk.Window):
 
         self.grid.add(self.Box_For_Special_Buttons )
 
-        self.grid.add(self.list_box)
+        self.grid.attach_next_to(self.Box_For_Total, self.Box_For_Special_Buttons, Gtk.PositionType.BOTTOM, 2 ,2 )
 
         self.add(self.grid)
 
@@ -122,11 +125,16 @@ class mainWindow(Gtk.Window):
 
         print(self.list_of_items)
 
-    def user_has_signed_on(self, staff_member):
-        self.sign_on = True
-        self.current_user = staff_member
-        print ("User: " + staff_member.name + " has signed on")
-
+    def user_has_signed_on(self, staff_member, entered_code):
+        self.sign_on_screen.destroy()
+        if staff_member.passcode == entered_code:
+            self.sign_on = True
+            self.current_user = staff_member
+            print ("User: " + staff_member.name + " has signed on")
+        else:
+            print("Error, wrong code")
+        
+            
     def set_new_item(self, old_item, new_item):
         print("Yolo")
         old_item.print_details()

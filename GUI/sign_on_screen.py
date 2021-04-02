@@ -5,12 +5,14 @@ import os
 sys.path.append(os.path.abspath('./Objects'))
 import staff as Staff
 
+from GUI.passcode_screen import passcode_screen
+
 from gi.repository import Gtk
 
 class sign_on_screen(Gtk.Window):
     def __init__(self, parent):
         Gtk.Window.__init__(self, title = "Sign On Screen")
-        self.box = Gtk.Box()
+        self.box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
         list_of_staff = parent.list_of_staff
 
         for staff in list_of_staff:
@@ -25,4 +27,9 @@ class sign_on_screen(Gtk.Window):
         self.box.pack_start(button, True, True, 0)
     
     def button_click_handler(event,self, staff, parent):
-        parent.user_has_signed_on(staff)
+
+        self.passcode_screen = passcode_screen(parent, staff)
+        self.passcode_screen.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
+
+    
