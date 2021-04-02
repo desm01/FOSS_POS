@@ -5,8 +5,10 @@ from Objects.item import Item
 from Objects.staff import Staff
 
 from Functions.checkout import checkout
+
 from GUI.add_item_window import add_item_window
 from GUI.show_buttons_window import show_buttons_window
+from GUI.sign_on_screen import sign_on_screen
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -15,9 +17,9 @@ from gi.repository import Gtk
 '''
 Setting up some dummy data
 '''
-staff1 = Staff("Des", '2001/02/26', "male", "Boss")
-staff2 = Staff("Alex", "1998/12/21", "male", "Assistant")
-staff3 = Staff("Liv", "1997/10/08", "female", "Co-boss")
+staff1 = Staff("Des", '2001/02/26', "male", "Boss", "0000")
+staff2 = Staff("Alex", "1998/12/21", "male", "Assistant", "0001")
+staff3 = Staff("Liv", "1997/10/08", "female", "Co-boss", "0002")
 
 item1 = Item("Coke", 1.29, 24, 1000001, "Drink", "Soft Drink")
 item2 = Item("Sprite", 1.09, 30, 1000002, "Drink", "Soft Drink")
@@ -45,7 +47,9 @@ class mainWindow(Gtk.Window):
         self.grid = Gtk.Grid()
 
         self.list_of_items = itemList
+        self.list_of_staff = staffList
 
+        self.sign_on = False
 
         self.Box_For_Item_Buttons = Gtk.Box()
         
@@ -74,15 +78,20 @@ class mainWindow(Gtk.Window):
             button.connect("clicked", self.add_to_total, item)
             self.Box_For_Item_Buttons.pack_start(button, True, True, 0)
 
+        self.initalise_sign_on_button()
         self.initalise_modify_button()
         self.initalise_add_item_button()
         self.initalise_checkout_button()
+
+    def initalise_sign_on_button(self):
+        sign_on_button = Gtk.Button(label = "Sign On")
+        sign_on_button.connect("clicked", self.sign_on_handler)
+        self.Box_For_Special_Buttons.pack_start(sign_on_button, True, True, 0)
 
     def initalise_modify_button(self):
         modify_button = Gtk.Button(label = "Modify Item")
         modify_button.connect("clicked", self.modify_button_handler)
         self.Box_For_Special_Buttons.add(modify_button)
-        self.show_all()
 
     def initalise_checkout_button(self):
         checkout_button = Gtk.Button(label = "Checkout")
@@ -94,6 +103,12 @@ class mainWindow(Gtk.Window):
         add_item_button.connect("clicked", self.add_new_item_handler)
         self.Box_For_Special_Buttons.pack_start(add_item_button, True, True, 0)
 
+    def sign_on_handler(self, button_event):
+        self.sign_on_screen = sign_on_screen(self)
+        self.sign_on_screen.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
+        self.sign_on_screen.show_all()
+
     def modify_button_handler(self, button_event):
         self.modify_window = show_buttons_window(self)
         self.modify_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
@@ -101,14 +116,16 @@ class mainWindow(Gtk.Window):
         self.modify_window.show_all()
 
     def add_new_item_handler(self, button_event):
-    
         self.add_item_window = add_item_window(self, itemList)
-
         self.add_item_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-
         self.add_item_window.show_all()
 
         print(self.list_of_items)
+
+    def user_has_signed_on(self, staff_member):
+        self.sign_on = True
+        self.current_user = staff_member
+        print ("User: " + staff_member.name + " has signed on")
 
     def set_new_item(self, old_item, new_item):
         print("Yolo")
@@ -140,9 +157,13 @@ class mainWindow(Gtk.Window):
         
 
     def checkout_handler(self, button_event):
-        checkout(current_basket)
-        self.clear_list_box()
-        current_basket.clear()
+
+        if self.sign_on:
+            checkout(current_basket)
+            self.clear_list_box()
+            current_basket.clear()
+        else:
+            print("You are not signed on")
 
     def clear_list_box(self):
         for item in self.list_box:

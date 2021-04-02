@@ -1,10 +1,11 @@
 class Staff:
 
-    def __init__(self, name, date_of_birth, gender, employee_type):
+    def __init__(self, name, date_of_birth, gender, employee_type, passcode):
         self.name = name
         self.date_of_birth = date_of_birth
         self.gender = gender
         self.employee_type = employee_type
+        self.passcode = passcode
 
     def __del__(self):
         print("Employee Destroyed")
