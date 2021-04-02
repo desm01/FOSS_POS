@@ -18,6 +18,8 @@ class sign_on_screen(Gtk.Window):
         for staff in list_of_staff:
             self.create_buttons_for_staff(staff, parent)
 
+
+        self.set_default_size(250, 250)
         self.add(self.box)
         self.show_all()
 

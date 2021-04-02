@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath('./Objects'))
 import item as Item
 
-from GUI.checkout_window import checkout_window
+from GUI.MessageBoxes.checkout_window import checkout_window
 
 
 def checkout(item_list):

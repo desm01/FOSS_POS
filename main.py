@@ -9,6 +9,8 @@ from Functions.checkout import checkout
 from GUI.add_item_window import add_item_window
 from GUI.show_buttons_window import show_buttons_window
 from GUI.sign_on_screen import sign_on_screen
+from GUI.MessageBoxes.wrong_passcode_screen import wrong_passcode_screen
+from GUI.MessageBoxes.not_signed_on import not_signed_on
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -132,7 +134,9 @@ class mainWindow(Gtk.Window):
             self.current_user = staff_member
             print ("User: " + staff_member.name + " has signed on")
         else:
-            print("Error, wrong code")
+            dialog = wrong_passcode_screen()
+            response = dialog.run()
+            dialog.destroy()
         
             
     def set_new_item(self, old_item, new_item):
@@ -171,7 +175,9 @@ class mainWindow(Gtk.Window):
             self.clear_list_box()
             current_basket.clear()
         else:
-            print("You are not signed on")
+            dialog = not_signed_on()
+            response = dialog.run()
+            dialog.destroy()
 
     def clear_list_box(self):
         for item in self.list_box:
