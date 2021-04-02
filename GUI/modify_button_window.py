@@ -36,7 +36,7 @@ class modify_button_window(Gtk.Window):
         self.item_type_category_entry.set_text(item.category)
 
         submit_button = Gtk.Button(label = "Submit")
-        submit_button.connect("clicked", self.submit_handler, self ,parent)
+        submit_button.connect("clicked", self.submit_handler, self ,parent, item)
 
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.name_entry, True, True, 0)
@@ -54,7 +54,7 @@ class modify_button_window(Gtk.Window):
 
         self.add(box)
 
-    def submit_handler(button_event, button ,  self, parent):
+    def submit_handler(button_event, button ,  self, parent, item):
         new_name = self.name_entry.get_text()
         new_price = float (self.price_entry.get_text())
         new_quantity = float(self.quantity_entry.get_text())
@@ -64,5 +64,6 @@ class modify_button_window(Gtk.Window):
 
         new_item = Item(new_name, new_price, new_quantity, new_plu_number, new_item_type, new_category)
 
-        item = new_item
-        parent.set_new_item(item)
+        parent.set_new_item(item, new_item)
+
+        self.destroy()

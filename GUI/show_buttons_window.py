@@ -23,13 +23,15 @@ class show_buttons_window(Gtk.Window):
     def set_up_buttons(self, parent):
         for item in parent.list_of_items:
             button = Gtk.Button(item.name)
-            button.connect("clicked", self.on_button_click, parent, item)
+            button.connect("clicked", self.on_button_click, parent, item, self)
             self.box.pack_start(button, True, True, 0)
 
         self.show_all()
 
         
-    def on_button_click(button, event, parent, item):
+    def on_button_click(button, event, parent, item, self):
         window = modify_button_window(parent, item)
         window.show_all()
         window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
+        self.destroy()

@@ -110,9 +110,24 @@ class mainWindow(Gtk.Window):
 
         print(self.list_of_items)
 
-    def set_new_item(self,item):
+    def set_new_item(self, old_item, new_item):
         print("Yolo")
-        item.print_details()
+        old_item.print_details()
+        new_item.print_details()
+
+        for item in self.list_of_items:
+            if item == old_item:
+                self.list_of_items.remove(item)
+                self.list_of_items.append(new_item)
+        
+        for item in self.Box_For_Item_Buttons:
+            if (item.get_label() == old_item.name):
+                item.destroy()
+                new_button = Gtk.Button(label = new_item.name)
+                new_button.connect("clicked", self.add_to_total, new_item)
+                self.Box_For_Item_Buttons.pack_start(new_button, True, True, 0)
+
+        self.show_all()
 
     def render_buttons(self):
         new_item = self.list_of_items[len(self.list_of_items) - 1]
