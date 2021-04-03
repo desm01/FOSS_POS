@@ -1,5 +1,8 @@
 import gi
 
+from Storage.store_items import store_items
+from Storage.get_items import get_items
+
 from Objects.item import Item
 
 from Objects.staff import Staff
@@ -36,20 +39,25 @@ staffList.append(staff1)
 staffList.append(staff2)
 staffList.append(staff3)
 
-itemList = []
+itemList = get_items()
+'''
 itemList.append(item1)
 itemList.append(item2)
 itemList.append(item3)
 itemList.append(item4)
-
+'''
 
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
 
+        
         self.grid = Gtk.Grid()
 
-        self.list_of_items = itemList
+
+      
+
+        self.list_of_items = get_items()
         self.list_of_staff = staffList
 
         self.sign_on = False
@@ -168,7 +176,7 @@ class mainWindow(Gtk.Window):
         self.show_all()
 
     def add_to_list_box(self, item_to_be_added):
-        label = Gtk.Label(item_to_be_added )
+        label = Gtk.Label(label = item_to_be_added )
         self.list_box.insert(label, -1)
         self.show_all()
 
@@ -182,6 +190,17 @@ class mainWindow(Gtk.Window):
             dialog = not_signed_on()
             response = dialog.run()
             dialog.destroy()
+
+    def render_buttons(self):
+        new_item = self.list_of_items[len(self.list_of_items) - 1]
+        new_button = Gtk.Button(label = new_item.name)
+        new_button.connect("clicked", self.add_to_total, new_item )
+
+        store_items(self.list_of_items)
+
+        self.Box_For_Item_Buttons.pack_start(new_button, True, True, 0)
+        self.show_all()
+        self.add_item_window.destroy()
 
 
 window = mainWindow()

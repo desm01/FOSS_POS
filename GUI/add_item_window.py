@@ -5,6 +5,8 @@ from Objects.item import Item
 
 from gi.repository import Gtk
 
+from Storage.store_items import store_items
+
 
 class add_item_window(Gtk.Window):
     def __init__(self, parent, list_of_items):
@@ -63,8 +65,7 @@ class add_item_window(Gtk.Window):
         else:
             new_item = Item(name, price, quantity, plu_number, item_type, item_category)
             parent.list_of_items.append(new_item)
-
-
+            
         parent.render_buttons()
 
     def check_if_item_already_exists(self, parent, name_of_item):
