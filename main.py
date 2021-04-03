@@ -11,6 +11,7 @@ from GUI.show_buttons_window import show_buttons_window
 from GUI.sign_on_screen import sign_on_screen
 from GUI.MessageBoxes.wrong_passcode_screen import wrong_passcode_screen
 from GUI.MessageBoxes.not_signed_on import not_signed_on
+from GUI.settings_window import settings_window
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -87,6 +88,13 @@ class mainWindow(Gtk.Window):
         self.initalise_modify_button()
         self.initalise_add_item_button()
         self.initalise_checkout_button()
+        self.initalise_settings_button()
+
+    def initalise_settings_button(self):
+        setting_button = Gtk.Button(label = "Settings")
+        setting_button.connect("clicked", self.settings_handler)
+        self.Box_For_Special_Buttons.pack_start(setting_button, True, True, 0)
+
 
     def initalise_sign_on_button(self):
         sign_on_button = Gtk.Button(label = "Sign On")
@@ -108,24 +116,25 @@ class mainWindow(Gtk.Window):
         add_item_button.connect("clicked", self.add_new_item_handler)
         self.Box_For_Special_Buttons.pack_start(add_item_button, True, True, 0)
 
+    def settings_handler(self, button_event):
+        self.settings_window = settings_window(self)
+        self.settings_window.show_all()
+        self.settings_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
     def sign_on_handler(self, button_event):
         self.sign_on_screen = sign_on_screen(self)
         self.sign_on_screen.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-
         self.sign_on_screen.show_all()
 
     def modify_button_handler(self, button_event):
         self.modify_window = show_buttons_window(self)
         self.modify_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-
         self.modify_window.show_all()
 
     def add_new_item_handler(self, button_event):
         self.add_item_window = add_item_window(self, itemList)
         self.add_item_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
         self.add_item_window.show_all()
-
-        print(self.list_of_items)
 
     def user_has_signed_on(self, staff_member, entered_code):
         self.sign_on_screen.destroy()
@@ -138,7 +147,7 @@ class mainWindow(Gtk.Window):
             response = dialog.run()
             dialog.destroy()
         
-        
+
     def checkout_handler(self, button_event):
 
         if self.sign_on:
@@ -164,11 +173,16 @@ class mainWindow(Gtk.Window):
         self.show_all()
 
     def add_to_total(self, button_event, item):
-        current_basket.append(item)
-        item_details = str(item.price) + "  " + item.name
-        self.add_to_list_box(item_details)
-        print(item.name)
-        print(item.price)
+        if self.sign_on:
+            current_basket.append(item)
+            item_details = str(item.price) + "  " + item.name
+            self.add_to_list_box(item_details)
+
+        else:
+            dialog = not_signed_on()
+            response = dialog.run()
+            dialog.destroy()
+
 
 window = mainWindow()
 window.connect("destroy", Gtk.main_quit)

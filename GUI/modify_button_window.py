@@ -66,6 +66,5 @@ class modify_button_window(Gtk.Window):
         
         item.update(new_item)
 
-        #parent.set_new_item(item, new_item)
 
         self.destroy()
