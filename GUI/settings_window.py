@@ -4,6 +4,9 @@ gi.require_version("Gtk", "3.0")
 from Objects.item import Item
 from Objects.staff import Staff
 
+from GUI.add_staff_member_window import add_staff_member_window
+from GUI.show_staff_window import show_staff_window
+
 from gi.repository import Gtk
 
 class settings_window(Gtk.Window):
@@ -14,10 +17,10 @@ class settings_window(Gtk.Window):
 
 
         add_staff_button = Gtk.Button(label = "Add Staff Member")
-        add_staff_button.connect("clicked", self.add_staff_handler)
+        add_staff_button.connect("clicked", self.add_staff_handler, parent)
 
         modify_staff_button = Gtk.Button(label = "Modify Staff Member")
-        modify_staff_button.connect("clicked", self.modify_staff_handler)
+        modify_staff_button.connect("clicked", self.modify_staff_handler, parent)
 
         view_records_button = Gtk.Button(label = "View Records")
         view_records_button.connect("clicked", self.view_records_handler)
@@ -32,8 +35,15 @@ class settings_window(Gtk.Window):
     def view_records_handler(self, button_event):
         print("records")
     
-    def add_staff_handler(self, button_event):
-        print("Adding staff")
+    def add_staff_handler(self, button_event, parent):
+        window = add_staff_member_window(parent)
+        window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        window.show_all()
+        self.destroy()
 
-    def modify_staff_handler(self, button_event):
-        print("Modify Staff")
+    def modify_staff_handler(self, button_event, parent):
+        window = show_staff_window(parent)
+        window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        window.show_all()
+
+        self.destroy()
