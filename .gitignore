@@ -11,3 +11,4 @@ GUI/MessageBoxes/__pycache__/wrong_passcode_screen.cpython-38.pyc
 GUI/MessageBoxes/__pycache__/checkout_window.cpython-38.pyc
 GUI/MessageBoxes/__pycache__/not_signed_on.cpython-38.pyc
 GUI/__pycache__/wrong_passcode_screen.cpython-38.pyc
+GUI/__pycache__/settings_window.cpython-38.pyc
