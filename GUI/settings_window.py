@@ -9,6 +9,7 @@ from GUI.add_staff_member_window import add_staff_member_window
 from GUI.show_staff_window import show_staff_window
 
 from Storage.store_items import default_store_items
+from Storage.store_staff import default_store_staff
 
 from gi.repository import Gtk
 
@@ -29,13 +30,17 @@ class settings_window(Gtk.Window):
         view_records_button.connect("clicked", self.view_records_handler)
 
         restore_items_button = Gtk.Button(label = "Restore Items")
-        restore_items_button.connect("clicked", self.restore_handler, parent)
+        restore_items_button.connect("clicked", self.restore_item_handler, parent)
+
+        restore_staff_button = Gtk.Button(label = "Restore Staff")
+        restore_staff_button.connect("clicked", self.restore_staff_handler, parent)
 
 
         box.pack_start(add_staff_button, True, True, 0)
         box.pack_start(modify_staff_button, True, True, 0)
         box.pack_start(view_records_button, True, True, 0)
         box.pack_start(restore_items_button, True, True, 0)
+        box.pack_start(restore_staff_button, True, True, 0)
 
         self.add(box)
 
@@ -55,7 +60,12 @@ class settings_window(Gtk.Window):
 
         self.destroy()
 
-    def restore_handler(self, button_event, parent):
+    def restore_item_handler(self, button_event, parent):
         default_store_items()
+        self.destroy()
+        parent.restart()
+
+    def restore_staff_handler(self, button_event, parent):
+        default_store_staff()
         self.destroy()
         parent.restart()
