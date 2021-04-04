@@ -1,3 +1,4 @@
+from Storage.get_staff import get_staff
 import gi
 
 from Storage.store_items import store_items
@@ -20,32 +21,14 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 
-'''
-Setting up some dummy data
-'''
-staff1 = Staff("Des", '2001/02/26', "male", "Boss", "0000")
-staff2 = Staff("Alex", "1998/12/21", "male", "Assistant", "0001")
-staff3 = Staff("Liv", "1997/10/08", "female", "Co-boss", "0002")
-
-item1 = Item("Coke", 1.29, 24, 1000001, "Drink", "Soft Drink")
-item2 = Item("Sprite", 1.09, 30, 1000002, "Drink", "Soft Drink")
-item3 = Item("Red Bull", 1.59, 4, 1000003, "Drink", "Energy Drink")
-item4 = Item("Mars Bar", 0.79, 12, 100004, "Food", "Candy")
 
 current_basket = []
 
-staffList = []
-staffList.append(staff1)
-staffList.append(staff2)
-staffList.append(staff3)
+staffList = get_staff()
+
 
 itemList = get_items()
-'''
-itemList.append(item1)
-itemList.append(item2)
-itemList.append(item3)
-itemList.append(item4)
-'''
+
 
 class mainWindow(Gtk.Window):
     def __init__(self):
@@ -202,6 +185,8 @@ class mainWindow(Gtk.Window):
         self.show_all()
         self.add_item_window.destroy()
 
+    def restart(self):
+        self.destroy()
 
 window = mainWindow()
 window.connect("destroy", Gtk.main_quit)

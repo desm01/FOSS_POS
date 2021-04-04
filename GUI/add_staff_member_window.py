@@ -2,6 +2,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from Storage.store_staff import store_staff
 from Objects.staff import Staff
 
 class add_staff_member_window(Gtk.Window):
@@ -61,5 +62,7 @@ class add_staff_member_window(Gtk.Window):
         new_staff_member = Staff(name, date_of_birth, gender, employee_type, passcode)
 
         parent.list_of_staff.append(new_staff_member)
+
+        store_staff(parent.list_of_staff)
 
         self.destroy()

@@ -3,9 +3,10 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from Objects.staff import Staff
+from Storage.store_staff import store_staff
 
 class modify_staff_member_window(Gtk.Window):
-    def __init__(self, staff):
+    def __init__(self, staff, parent):
         Gtk.Window.__init__(self, title = "Modify Staff Member")
 
 
@@ -25,7 +26,7 @@ class modify_staff_member_window(Gtk.Window):
 
 
         submit_button = Gtk.Button("Submit")
-        submit_button.connect("clicked", self.on_click, staff)
+        submit_button.connect("clicked", self.on_click, staff, parent)
 
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.name_entry, True, True, 0)
@@ -43,11 +44,13 @@ class modify_staff_member_window(Gtk.Window):
         self.show_all()
 
 
-    def on_click(self, button_event, old_staff):
+    def on_click(self, button_event, old_staff, parent):
         new_name = self.name_entry.get_text()
         new_gender = self.gender_entry.get_text()
         new_employee_type = self.employee_type_entry.get_text()
 
         old_staff.update_details(new_name, new_gender, new_employee_type)
+
+        store_staff(parent.list_of_staff)
 
         self.destroy()
