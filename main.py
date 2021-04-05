@@ -111,7 +111,7 @@ class mainWindow(Gtk.Window):
         self.modify_window.show_all()
 
     def add_new_item_handler(self, button_event):
-        self.add_item_window = add_item_window(self, itemList)
+        self.add_item_window = add_item_window(self, self.list_of_items)
         self.add_item_window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
         self.add_item_window.show_all()
 
@@ -175,7 +175,7 @@ class mainWindow(Gtk.Window):
 
         self.Box_For_Item_Buttons.pack_start(new_button, True, True, 0)
         self.show_all()
-        self.destroy()
+      #  self.destroy()
 
     def restart(self):
         self.destroy()

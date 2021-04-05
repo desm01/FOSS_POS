@@ -67,6 +67,7 @@ class add_item_window(Gtk.Window):
             parent.list_of_items.append(new_item)
             
         parent.render_buttons()
+        self.destroy()
 
     def check_if_item_already_exists(self, parent, name_of_item):
         for item in parent.list_of_items:
