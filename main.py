@@ -21,8 +21,8 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 current_basket = []
-staffList = get_staff()
-itemList = get_items()
+#staffList = get_staff()
+#itemList = get_items()
 
 class mainWindow(Gtk.Window):
     def __init__(self):
@@ -30,7 +30,7 @@ class mainWindow(Gtk.Window):
         self.grid = Gtk.Grid()
 
         self.list_of_items = get_items()
-        self.list_of_staff = staffList
+        self.list_of_staff = get_staff()
 
         self.sign_on = False
 
@@ -58,7 +58,7 @@ class mainWindow(Gtk.Window):
 
 
     def intialise_buttons(self):
-        for item in itemList:
+        for item in self.list_of_items:
             button = Gtk.Button(label = item.name)
             button.connect("clicked", self.add_to_total, item)
             self.Box_For_Item_Buttons.pack_start(button, True, True, 0)
@@ -175,7 +175,7 @@ class mainWindow(Gtk.Window):
 
         self.Box_For_Item_Buttons.pack_start(new_button, True, True, 0)
         self.show_all()
-        self.add_item_window.destroy()
+        self.destroy()
 
     def restart(self):
         self.destroy()
