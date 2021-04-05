@@ -4,8 +4,8 @@ import gi
 from Storage.store_items import store_items
 from Storage.get_items import get_items
 
+from Objects.purchase import Purchase
 from Objects.item import Item
-
 from Objects.staff import Staff
 
 from Functions.checkout import checkout
@@ -20,25 +20,14 @@ from GUI.settings_window import settings_window
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-
-
 current_basket = []
-
 staffList = get_staff()
-
-
 itemList = get_items()
-
 
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
-
-        
         self.grid = Gtk.Grid()
-
-
-      
 
         self.list_of_items = get_items()
         self.list_of_staff = staffList
@@ -46,7 +35,6 @@ class mainWindow(Gtk.Window):
         self.sign_on = False
 
         self.Box_For_Item_Buttons = Gtk.Box()
-        
         
         self.Box_For_Special_Buttons = Gtk.Box()
 
@@ -128,6 +116,7 @@ class mainWindow(Gtk.Window):
         self.add_item_window.show_all()
 
     def user_has_signed_on(self, staff_member, entered_code):
+        self.staff_member = staff_member
         self.sign_on_screen.destroy()
         if staff_member.passcode == entered_code:
             self.sign_on = True
@@ -143,6 +132,9 @@ class mainWindow(Gtk.Window):
 
         if self.sign_on:
             checkout(current_basket)
+            new_purchase = Purchase(current_basket, self.staff_member, self.staff_member)
+            new_purchase.record_item()
+            
             self.clear_list_box()
             current_basket.clear()
         else:
