@@ -3,7 +3,7 @@ gi.require_version("Gtk", "3.0")
 
 from Objects.item import Item
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
-from Functions.check_if_item_is_correct import check_if_item_is_correct
+from Functions.check_if_item_is_correct import check_if_new_item_is_correct
 
 from gi.repository import Gtk
 
@@ -67,7 +67,7 @@ class modify_button_window(Gtk.Window):
 
             new_item = Item(new_name, new_price, new_quantity, new_plu_number, new_item_type, new_category)
         
-            if check_if_item_is_correct(new_item):
+            if check_if_new_item_is_correct(new_item) == True:
                 item.update(new_item)
 
             else:
@@ -85,4 +85,4 @@ class modify_button_window(Gtk.Window):
         
 
        # parent.render_buttons()
-        self.destroy()
+            self.destroy()

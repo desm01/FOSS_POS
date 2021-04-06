@@ -1,10 +1,10 @@
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
-from Functions.check_if_item_is_correct import check_if_item_is_correct
+from Functions.check_if_item_is_correct import check_if_new_item_is_correct
 import gi
 gi.require_version("Gtk", "3.0")
 
 from Objects.item import Item
-from Functions.check_if_item_is_correct import check_if_item_is_correct
+
 
 from gi.repository import Gtk
 
@@ -67,9 +67,8 @@ class add_item_window(Gtk.Window):
                 print("Item already exists")
         
             else:
-            
                 new_item = Item(name, price, quantity, plu_number, item_type, item_category)
-                if check_if_item_is_correct(new_item):
+                if check_if_new_item_is_correct(new_item):
                     parent.list_of_items.append(new_item)
                     parent.render_buttons()
 
