@@ -160,7 +160,7 @@ class mainWindow(Gtk.Window):
             current_basket.append(item)
             item_details = str(item.price) + "  " + item.name
             self.add_to_list_box(item_details)
-
+ 
         else:
             dialog = not_signed_on()
             response = dialog.run()
@@ -179,7 +179,7 @@ class mainWindow(Gtk.Window):
 
     def restart(self):
         self.destroy()
-        restart_program()
+        start_program()
 
 
 def start_program():
@@ -190,12 +190,5 @@ def start_program():
     window.set_size_request(800,400)
     Gtk.main()
 
-def restart_program():
-    window = mainWindow()
-    window.connect("destroy", Gtk.main_quit)
-    window.show_all()
-    window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-    window.set_size_request(800,400)
-    Gtk.main()
 
 start_program()

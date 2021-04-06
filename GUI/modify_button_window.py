@@ -2,6 +2,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 
 from Objects.item import Item
+from GUI.MessageBoxes.alert_messagebox import alert_messagebox
+from Functions.check_if_item_is_correct import check_if_item_is_correct
 
 from gi.repository import Gtk
 
@@ -55,16 +57,32 @@ class modify_button_window(Gtk.Window):
         self.add(box)
 
     def submit_handler(button_event, button ,  self, parent, item):
-        new_name = self.name_entry.get_text()
-        new_price = float (self.price_entry.get_text())
-        new_quantity = float(self.quantity_entry.get_text())
-        new_plu_number = float(self.plu_number_entry.get_text())
-        new_item_type = self.item_type_entry.get_text()
-        new_category = self.item_type_category_entry.get_text()
+        try:
+            new_name = self.name_entry.get_text()
+            new_price = float (self.price_entry.get_text())
+            new_quantity = float(self.quantity_entry.get_text())
+            new_plu_number = float(self.plu_number_entry.get_text())
+            new_item_type = self.item_type_entry.get_text()
+            new_category = self.item_type_category_entry.get_text()
 
-        new_item = Item(new_name, new_price, new_quantity, new_plu_number, new_item_type, new_category)
+            new_item = Item(new_name, new_price, new_quantity, new_plu_number, new_item_type, new_category)
         
-        item.update(new_item)
+            if check_if_item_is_correct(new_item):
+                item.update(new_item)
+
+            else:
+                dialog = alert_messagebox("Error, the fields have been incorrectly filled out")
+                response = dialog.run()
+                dialog.destroy()
+
+
+        except:
+            dialog = alert_messagebox("Error, the items have been incorrectly formated")
+            response = dialog.run()
+            dialog.destroy()
+
+
+        
 
        # parent.render_buttons()
         self.destroy()

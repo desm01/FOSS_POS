@@ -1,5 +1,5 @@
 import pickle
-from Storage.store_records import record_transaction
+#from Storage.store_records import record_transaction
 
 def get_records():
 

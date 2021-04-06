@@ -26,3 +26,10 @@ Storage/__pycache__/store_records.cpython-38.pyc
 Objects/__pycache__/purchase.cpython-38.pyc
 Storage/__pycache__/get_records.cpython-38.pyc
 GUI/__pycache__/show_records.cpython-38.pyc
+GUI/__pycache__/add_item_window.cpython-38.pyc
+GUI/MessageBoxes/__pycache__/alert_messagebox.cpython-38.pyc
+GUI/MessageBoxes/__pycache__/restore_messagebox.cpython-38.pyc
+Functions/__pycache__/check_if_item_is_correct.cpython-38.pyc
+GUI/__pycache__/add_item_window.cpython-38.pyc
+GUI/__pycache__/add_item_window.cpython-38.pyc
+GUI/__pycache__/add_item_window.cpython-38.pyc

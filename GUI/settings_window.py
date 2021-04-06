@@ -1,5 +1,7 @@
 from pickle import TRUE
 import gi
+import os
+
 gi.require_version("Gtk", "3.0")
 
 from Objects.item import Item
@@ -8,6 +10,7 @@ from Objects.staff import Staff
 from GUI.add_staff_member_window import add_staff_member_window
 from GUI.show_staff_window import show_staff_window
 from GUI.show_records import show_records
+from GUI.MessageBoxes.alert_messagebox import alert_messagebox
 
 from Storage.store_items import default_store_items
 from Storage.store_staff import default_store_staff
@@ -36,20 +39,42 @@ class settings_window(Gtk.Window):
         restore_staff_button = Gtk.Button(label = "Restore Staff")
         restore_staff_button.connect("clicked", self.restore_staff_handler, parent)
 
+        restore_records_button = Gtk.Button(label = "Restore Records")
+        restore_records_button.connect("clicked", self.restore_records_handler) 
+
 
         box.pack_start(add_staff_button, True, True, 0)
         box.pack_start(modify_staff_button, True, True, 0)
         box.pack_start(view_records_button, True, True, 0)
         box.pack_start(restore_items_button, True, True, 0)
         box.pack_start(restore_staff_button, True, True, 0)
+        box.pack_start(restore_records_button, True, True, 0)
 
         self.add(box)
 
+    def restore_records_handler(self, button_event):
+        try:
+            os.remove("records_dump.pkl")
+            self.destroy()
+            dialog = alert_messagebox("Records have been destroyed")
+            response = dialog.run()
+            dialog.destroy()
+        except:
+            self.destroy()
+            dialog = alert_messagebox("Error, records have already been destroyed")
+            response = dialog.run()
+            dialog.destroy()
+
     def view_records_handler(self, button_event, parent):
-        window = show_records(parent)
-        window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-        window.show_all()
-        self.destroy()
+        try:
+            window = show_records(parent)
+            window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+            window.show_all()
+            self.destroy()
+        except:
+            dialog = alert_messagebox("Error, there are no records to view")
+            response = dialog.run()
+            dialog.destroy()
     
     def add_staff_handler(self, button_event, parent):
         window = add_staff_member_window(parent)
