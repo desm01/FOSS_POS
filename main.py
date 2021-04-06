@@ -133,7 +133,7 @@ class mainWindow(Gtk.Window):
         if self.sign_on:
             checkout(current_basket)
             new_purchase = Purchase(current_basket, self.staff_member, self.staff_member)
-            new_purchase.record_item()
+           # new_purchase.record_item()
             
             self.clear_list_box()
             current_basket.clear()
@@ -179,11 +179,23 @@ class mainWindow(Gtk.Window):
 
     def restart(self):
         self.destroy()
+        restart_program()
 
-window = mainWindow()
-window.connect("destroy", Gtk.main_quit)
-window.show_all()
-window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-window.set_size_request(800,400)
-Gtk.main()
 
+def start_program():
+    window = mainWindow()
+    window.connect("destroy", Gtk.main_quit)
+    window.show_all()
+    window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+    window.set_size_request(800,400)
+    Gtk.main()
+
+def restart_program():
+    window = mainWindow()
+    window.connect("destroy", Gtk.main_quit)
+    window.show_all()
+    window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+    window.set_size_request(800,400)
+    Gtk.main()
+
+start_program()

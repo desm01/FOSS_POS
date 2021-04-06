@@ -24,3 +24,5 @@ Storage/__pycache__/get_staff.cpython-38.pyc
 Storage/__pycache__/store_staff.cpython-38.pyc
 Storage/__pycache__/store_records.cpython-38.pyc
 Objects/__pycache__/purchase.cpython-38.pyc
+Storage/__pycache__/get_records.cpython-38.pyc
+GUI/__pycache__/show_records.cpython-38.pyc

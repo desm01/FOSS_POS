@@ -7,6 +7,7 @@ from Objects.staff import Staff
 
 from GUI.add_staff_member_window import add_staff_member_window
 from GUI.show_staff_window import show_staff_window
+from GUI.show_records import show_records
 
 from Storage.store_items import default_store_items
 from Storage.store_staff import default_store_staff
@@ -27,7 +28,7 @@ class settings_window(Gtk.Window):
         modify_staff_button.connect("clicked", self.modify_staff_handler, parent)
 
         view_records_button = Gtk.Button(label = "View Records")
-        view_records_button.connect("clicked", self.view_records_handler)
+        view_records_button.connect("clicked", self.view_records_handler, parent)
 
         restore_items_button = Gtk.Button(label = "Restore Items")
         restore_items_button.connect("clicked", self.restore_item_handler, parent)
@@ -44,8 +45,11 @@ class settings_window(Gtk.Window):
 
         self.add(box)
 
-    def view_records_handler(self, button_event):
-        print("records")
+    def view_records_handler(self, button_event, parent):
+        window = show_records(parent)
+        window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        window.show_all()
+        self.destroy()
     
     def add_staff_handler(self, button_event, parent):
         window = add_staff_member_window(parent)

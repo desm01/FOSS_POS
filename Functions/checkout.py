@@ -19,7 +19,7 @@ def format_text_for_checkout(item_list):
         list_of_items += "\n" + item.name
         total_cost_of_items += item.price
 
-    string = list_of_items + "\n\n" + str (total_cost_of_items)
+    string = list_of_items + "\n\n" + "{:.2f}".format(total_cost_of_items)
     return string
 
 def display_checkout(checkout_text):

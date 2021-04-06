@@ -15,6 +15,16 @@ class Purchase:
     def get_date_time(self):
         return datetime.datetime.now()
 
+    def details(self):
+        label = ""
+        for item in self.list_of_items:
+            label += "Item : " + item.name + "\nPrice: £" + "{:.2f}".format(item.price) + "\n"
+        label += "\nTotal Cost £" + "{:.2f}".format(self.total_cost)
+        label += "\nServed By: " + self.served_by.name
+        label += "\nDate Time: " + str(self.date_time.date())
+
+        return label
+
     def generate_cost(self):
         cost = 0
         for item in self.list_of_items:
