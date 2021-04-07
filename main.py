@@ -1,5 +1,6 @@
 from Storage.get_staff import get_staff
 import gi
+import math
 
 from Storage.store_items import store_items
 from Storage.get_items import get_items
@@ -21,12 +22,21 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 current_basket = []
-#staffList = get_staff()
-#itemList = get_items()
+
 
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
+        
+
+        self.initalise_form()
+
+       
+       
+
+
+    def initalise_form(self):
+        
         self.grid = Gtk.Grid()
 
         self.list_of_items = get_items()
@@ -34,7 +44,7 @@ class mainWindow(Gtk.Window):
 
         self.sign_on = False
 
-        self.Box_For_Item_Buttons = Gtk.Box()
+
         
         self.Box_For_Special_Buttons = Gtk.Box()
 
@@ -46,28 +56,42 @@ class mainWindow(Gtk.Window):
         
         self.Box_For_Total.add(self.list_box)
 
-        self.intialise_buttons()
+        self.Box_For_Buttons = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
 
-        self.grid.add(self.Box_For_Item_Buttons)
+        number_of_rows_to_create = len(self.list_of_items) / 5
+        number_of_rows_to_create = math.ceil(number_of_rows_to_create)
 
-        self.grid.add(self.Box_For_Special_Buttons )
+        item_counter = 0
+        
+        for row in range (0, number_of_rows_to_create):
+            new_row = Gtk.Box()
+            for i in range(0,5):
+                if item_counter == len(self.list_of_items):
+                    break
+                button = Gtk.Button(label = self.list_of_items[item_counter].name)
+                button.connect("clicked", self.add_to_total, self.list_of_items[item_counter])
 
-        self.grid.attach_next_to(self.Box_For_Total, self.Box_For_Special_Buttons, Gtk.PositionType.BOTTOM, 2 ,2 )
+                new_row.pack_start(button, True, True, 0)
+                item_counter = item_counter + 1
 
-        self.add(self.grid)
-
-
-    def intialise_buttons(self):
-        for item in self.list_of_items:
-            button = Gtk.Button(label = item.name)
-            button.connect("clicked", self.add_to_total, item)
-            self.Box_For_Item_Buttons.pack_start(button, True, True, 0)
+            self.Box_For_Buttons.pack_start(new_row, True, True, 0)
+                
 
         self.initalise_sign_on_button()
         self.initalise_modify_button()
         self.initalise_add_item_button()
         self.initalise_checkout_button()
         self.initalise_settings_button()
+
+
+        self.grid.add(self.Box_For_Buttons)
+
+        self.grid.add(self.Box_For_Special_Buttons )
+
+        self.grid.attach_next_to(self.Box_For_Total, self.Box_For_Special_Buttons, Gtk.PositionType.BOTTOM, 1 ,1 )
+
+        self.add(self.grid)
+
 
     def initalise_settings_button(self):
         setting_button = Gtk.Button(label = "Settings")
@@ -173,7 +197,9 @@ class mainWindow(Gtk.Window):
 
         store_items(self.list_of_items)
 
-        self.Box_For_Item_Buttons.pack_start(new_button, True, True, 0)
+        self.grid.destroy()
+        #self.Box_For_Buttons = Gtk.Box()
+        self.initalise_form() #.pack_start(new_button, True, True, 0)
         self.show_all()
       #  self.destroy()
 

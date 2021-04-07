@@ -55,7 +55,7 @@ class add_item_window(Gtk.Window):
 
     def submit_handler(self,button_event, parent, list_of_items):
 
-        try:
+        
             name = self.name_entry.get_text()
             price = float (self.price_entry.get_text())
             quantity = float(self.quantity_entry.get_text())
@@ -72,15 +72,11 @@ class add_item_window(Gtk.Window):
                     parent.list_of_items.append(new_item)
                     parent.render_buttons()
 
-        except:
-            dialog = alert_messagebox("Error, the fields have been filled out incorrectly")
-            response = dialog.run()
-            dialog.destroy()
 
 
             
 
-        self.destroy()
+            self.destroy()
 
 
     def check_if_item_already_exists(self, parent, name_of_item):
