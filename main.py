@@ -1,4 +1,3 @@
-from os import sendfile
 from Storage.get_staff import get_staff
 import gi
 import math

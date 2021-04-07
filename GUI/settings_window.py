@@ -9,7 +9,7 @@ from Objects.staff import Staff
 
 from GUI.add_staff_member_window import add_staff_member_window
 from GUI.show_staff_window import show_staff_window
-from GUI.show_records import show_records
+from GUI.Records.show_records import show_records
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
 
 from Storage.store_items import default_store_items
