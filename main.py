@@ -1,3 +1,4 @@
+from os import sendfile
 from Storage.get_staff import get_staff
 import gi
 import math
@@ -44,11 +45,13 @@ class mainWindow(Gtk.Window):
 
         self.sign_on = False
 
-
         
         self.Box_For_Special_Buttons = Gtk.Box()
 
         self.Box_For_Total = Gtk.Box()
+
+  
+
         
         self.list_box = Gtk.ListBox()
         lbl = Gtk.Label(label = "Current Basket")
@@ -75,7 +78,8 @@ class mainWindow(Gtk.Window):
                 item_counter = item_counter + 1
 
             self.Box_For_Buttons.pack_start(new_row, True, True, 0)
-                
+        
+
 
         self.initalise_sign_on_button()
         self.initalise_modify_button()
@@ -83,14 +87,15 @@ class mainWindow(Gtk.Window):
         self.initalise_checkout_button()
         self.initalise_settings_button()
 
+  
+        self.grid.add(self.Box_For_Special_Buttons)
+        self.grid.attach_next_to(self.Box_For_Buttons, self.Box_For_Special_Buttons, Gtk.PositionType.RIGHT, 1, 1)
+        self.grid.attach_next_to(self.Box_For_Total, self.Box_For_Special_Buttons, Gtk.PositionType.BOTTOM, 2,2)
 
-        self.grid.add(self.Box_For_Buttons)
-
-        self.grid.add(self.Box_For_Special_Buttons )
-
-        self.grid.attach_next_to(self.Box_For_Total, self.Box_For_Special_Buttons, Gtk.PositionType.BOTTOM, 1 ,1 )
-
+       
         self.add(self.grid)
+        
+        
 
 
     def initalise_settings_button(self):
@@ -214,6 +219,7 @@ def start_program():
     window.show_all()
     window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
     window.set_size_request(800,400)
+   # window.set_hexpand(False)
     Gtk.main()
 
 
