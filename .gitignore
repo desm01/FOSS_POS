@@ -37,3 +37,7 @@ GUI/__pycache__/add_item_window.cpython-38.pyc
 GUI/__pycache__/add_item_window.cpython-38.pyc
 GUI/Records/__pycache__/show_records.cpython-38.pyc
 GUI/__pycache__/add_item_window.cpython-38.pyc
+GUI/Records/__pycache__/show_all_records_window.cpython-38.pyc
+GUI/Records/__pycache__/show_todays_records_window.cpython-38.pyc
+Queries/__pycache__/show_records_today.cpython-38.pyc
+Queries/__pycache__/show_all_records.cpython-38.pyc

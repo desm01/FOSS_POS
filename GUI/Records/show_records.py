@@ -1,8 +1,11 @@
+from GUI.Records.show_todays_records_window import show_todays_records_window
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from Storage.get_records import get_records
-import datetime
+
+
+from GUI.Records.show_all_records_window import show_all_records_window
 
 
 class show_records(Gtk.Window):
@@ -40,22 +43,22 @@ class show_records(Gtk.Window):
         self.add(Box_For_Options)
     
 
-    def show_all_records(self):
-        print("showing all records")
+    def show_all_records(self, button_event):
+        win = show_all_records_window()
 
-    def show_records_for_today(self):
-        print("showing todays records")
+    def show_records_for_today(self, button_event):
+        win = show_todays_records_window()
 
-    def show_records_for_staff_member(self):
+    def show_records_for_staff_member(self, button_event):
         print("showing records for staff member")
 
-    def show_records_for_specific_date(self):
+    def show_records_for_specific_date(self, button_event):
         print("Shpwing for specifig date")
 
-    def show_records_for_specific_item(self):
+    def show_records_for_specific_item(self, button_event):
         print("showing for specific item")
 
-    def show_records_for_specific_category(self):
+    def show_records_for_specific_category(self, button_event):
         print("showing for specific category")
 
 
