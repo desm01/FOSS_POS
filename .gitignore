@@ -42,3 +42,6 @@ GUI/Records/__pycache__/show_todays_records_window.cpython-38.pyc
 Queries/__pycache__/show_records_today.cpython-38.pyc
 Queries/__pycache__/show_all_records.cpython-38.pyc
 GUI/Records/__pycache__/show_records_staff_window.cpython-38.pyc
+Queries/__pycache__/show_records_for_staff_member.cpython-38.pyc
+GUI/Records/__pycache__/show_records_for_staff.cpython-38.pyc
+GUI/Records/__pycache__/select_staff_window.cpython-38.pyc

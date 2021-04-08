@@ -3,8 +3,9 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from Storage.get_staff import get_staff
+from GUI.Records.show_records_for_staff import show_records_for_staff
 
-class show_records_staff_window(Gtk.Window):
+class select_staff_window(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "Which Member Of Staff?")
         
@@ -60,4 +61,4 @@ class show_records_staff_window(Gtk.Window):
             self.box_for_staff.pack_start(button, True, True, 0)
 
     def on_click_handler(self, button_event, staff_member):
-        print(staff_member.name)
+        win = show_records_for_staff(staff_member)

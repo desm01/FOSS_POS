@@ -1,6 +1,6 @@
 
 from GUI.Records.show_todays_records_window import show_todays_records_window
-from GUI.Records.show_records_staff_window import show_records_staff_window
+from GUI.Records.select_staff_window import select_staff_window
 
 import gi
 gi.require_version("Gtk", "3.0")
@@ -53,7 +53,7 @@ class show_records(Gtk.Window):
         win = show_todays_records_window()
 
     def show_records_for_staff_member(self, button_event):
-        win = show_records_staff_window()
+        win = select_staff_window()
 
     def show_records_for_specific_date(self, button_event):
         print("Shpwing for specifig date")
