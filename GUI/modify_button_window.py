@@ -12,6 +12,10 @@ class modify_button_window(Gtk.Window):
     def __init__(self, parent, item):
         Gtk.Window.__init__(self, title = "Change Price")
 
+        self.set_border_width(25)
+
+        self.fullscreen()
+
         box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
         
         name_label = Gtk.Label("Name:")
@@ -41,6 +45,9 @@ class modify_button_window(Gtk.Window):
         submit_button = Gtk.Button(label = "Submit")
         submit_button.connect("clicked", self.submit_handler ,parent, item)
 
+        back_button = Gtk.Button(label = "Back")
+        back_button.connect("clicked", self.back_handler)
+
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.name_entry, True, True, 0)
         box.pack_start(price_label, True, True, 0)
@@ -53,9 +60,17 @@ class modify_button_window(Gtk.Window):
         box.pack_start(self.item_type_entry, True, True, 0)
         box.pack_start(item_type_category_label, True, True, 0)
         box.pack_start(self.item_type_category_entry, True, True, 0)
-        box.pack_start(submit_button, True, True, 0)
+
+        hBox = Gtk.Box()
+        hBox.pack_start(back_button, True, True, 25)
+        hBox.pack_start(submit_button, True, True, 25)
+
+        box.pack_start(hBox, True, True, 0)
 
         self.add(box)
+
+    def back_handler(self, button_event):
+        self.destroy()
 
     def submit_handler(self, button_event, parent, item):
         try:

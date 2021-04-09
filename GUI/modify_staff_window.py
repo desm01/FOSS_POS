@@ -11,6 +11,9 @@ class modify_staff_member_window(Gtk.Window):
     def __init__(self, staff, parent):
         Gtk.Window.__init__(self, title = "Modify Staff Member")
 
+        self.set_border_width(25)
+
+        self.fullscreen()
 
         box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
         
@@ -30,6 +33,9 @@ class modify_staff_member_window(Gtk.Window):
         submit_button = Gtk.Button("Submit")
         submit_button.connect("clicked", self.on_click, staff, parent)
 
+        back_button = Gtk.Button("Back")
+        back_button.connect("clicked", self.back_handler)
+
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.passcode_entry, True, True, 0)
 
@@ -39,12 +45,19 @@ class modify_staff_member_window(Gtk.Window):
         box.pack_start(employee_type_label, True, True, 0)
         box.pack_start(self.employee_type_entry, True, True, 0)
 
-        box.pack_start(submit_button, True, True, 0)
+        hBox = Gtk.Box()
+        hBox.pack_start(back_button, True, True, 0)
+        hBox.pack_start(submit_button, True, True, 0)
+
+        box.pack_start(hBox, True, True, 0)
 
         self.add(box)
 
         self.show_all()
 
+
+    def back_handler(self, button_event):
+        self.destroy()
 
     def check_if_string_is_valid(self, name, gender, employee_type):
         if len(name) < 1 or len(gender) < 1 or len(employee_type) < 1:

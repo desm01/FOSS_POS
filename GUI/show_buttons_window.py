@@ -1,3 +1,4 @@
+from os import terminal_size
 import gi
 gi.require_version("Gtk", "3.0")
 
@@ -16,6 +17,7 @@ class show_buttons_window(Gtk.Window):
         label = Gtk.Label(label = "Select the item you wish to modify")
         self.main_box.pack_start(label, True, True, 0)
 
+        self.fullscreen()
         self.set_up_buttons(parent)
         self.add(self.main_box)
 
@@ -28,6 +30,7 @@ class show_buttons_window(Gtk.Window):
 
         for row in range (0, number_of_rows_to_create):
             new_row = Gtk.Box()
+            new_row.set_homogeneous(True)
             for i in range(0,5):
                 if item_counter == len(parent.list_of_items):
                     break

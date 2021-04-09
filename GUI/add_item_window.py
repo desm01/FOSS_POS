@@ -14,8 +14,12 @@ from Storage.store_items import store_items
 class add_item_window(Gtk.Window):
     def __init__(self, parent, list_of_items):
         Gtk.Window.__init__(self, title = "Add New Item")
-        box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
+        box = Gtk.Box(spacing = 10, orientation = Gtk.Orientation.VERTICAL)
         
+        self.set_border_width(25)
+
+        self.fullscreen()
+
         name_label = Gtk.Label("Name:")
         self.name_entry = Gtk.Entry()
 
@@ -37,6 +41,9 @@ class add_item_window(Gtk.Window):
         submit_button = Gtk.Button(label = "Submit")
         submit_button.connect("clicked", self.submit_handler, parent, list_of_items)
 
+        back_button = Gtk.Button(label = "Back")
+        back_button.connect("clicked", self.back_handler)
+
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.name_entry, True, True, 0)
         box.pack_start(price_label, True, True, 0)
@@ -49,13 +56,21 @@ class add_item_window(Gtk.Window):
         box.pack_start(self.item_type_entry, True, True, 0)
         box.pack_start(item_type_category_label, True, True, 0)
         box.pack_start(self.item_type_category_entry, True, True, 0)
-        box.pack_start(submit_button, True, True, 0)
+
+        hBox = Gtk.Box()
+
+        hBox.pack_start(back_button, True, True, 25)
+        hBox.pack_start(submit_button, True, True, 25)
+
+        box.pack_start(hBox, True, True, 0)
 
         self.add(box)
 
+    def back_handler(self, button_event):
+        self.destroy()
+
     def submit_handler(self,button_event, parent, list_of_items):
 
-        
             name = self.name_entry.get_text()
             price = float (self.price_entry.get_text())
             quantity = float(self.quantity_entry.get_text())

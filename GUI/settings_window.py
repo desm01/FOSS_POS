@@ -23,6 +23,12 @@ class settings_window(Gtk.Window):
 
         box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
 
+        self.set_border_width(25)
+
+        self.fullscreen()
+
+        back_button = Gtk.Button(label = "Back")
+        back_button.connect("clicked", self.back_handler)
 
         add_staff_button = Gtk.Button(label = "Add Staff Member")
         add_staff_button.connect("clicked", self.add_staff_handler, parent)
@@ -45,6 +51,7 @@ class settings_window(Gtk.Window):
         exit_application_button = Gtk.Button(label = "Exit Application")
         exit_application_button.connect("clicked", self.exit_application, parent) 
 
+
         box.pack_start(exit_application_button, True, True, 0)
         box.pack_start(add_staff_button, True, True, 0)
         box.pack_start(modify_staff_button, True, True, 0)
@@ -52,9 +59,13 @@ class settings_window(Gtk.Window):
         box.pack_start(restore_items_button, True, True, 0)
         box.pack_start(restore_staff_button, True, True, 0)
         box.pack_start(restore_records_button, True, True, 0)
+        box.pack_start(back_button, True, True, 0)
 
         self.add(box)
     
+    def back_handler(self, button_event):
+        self.destroy()
+
     def exit_application(self, button_event, parent):
         self.destroy()
         parent.destroy()

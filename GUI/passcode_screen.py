@@ -17,7 +17,7 @@ class passcode_screen(Gtk.Window):
         Box_For_Zero = Gtk.Box()
 
         for i in range(0,10):
-            button = Gtk.Button(label = str(i))
+            button = Gtk.Button(label = str(i), expand = True)
             button.connect("clicked", self.on_click, parent)
 
             if i == 0:
@@ -33,14 +33,14 @@ class passcode_screen(Gtk.Window):
                 Box_For_Top_Row.pack_start(button, True, True, 0)
 
 
-        minus_button = Gtk.Button(label = "-")
+        minus_button = Gtk.Button(label = "-", expand = True)
         minus_button.connect("clicked", self.minus_button_click, parent)
 
         Box_For_Zero.pack_start(minus_button, True, True, 0)
 
 
 
-        submit_button = Gtk.Button(label = "Submit")
+        submit_button = Gtk.Button(label = "Submit", expand = True)
         submit_button.connect("clicked", self.submit_handler, parent, staff_member)
 
 
@@ -52,8 +52,9 @@ class passcode_screen(Gtk.Window):
         grid.attach_next_to(Box_For_Bottom_Row, Box_For_Middle_Row, Gtk.PositionType.BOTTOM, 1 , 1)
         grid.attach_next_to(Box_For_Zero ,Box_For_Bottom_Row, Gtk.PositionType.BOTTOM, 1 , 1)
         grid.attach_next_to(submit_button, Box_For_Zero, Gtk.PositionType.BOTTOM, 1 ,1)
-
+        self.resize(400,380)
         self.add(grid)
+       
         self.show_all()
 
     def minus_button_click(self, button_event, parent):

@@ -1,4 +1,4 @@
-from os import terminal_size
+
 from Storage.get_staff import get_staff
 import gi
 import math
@@ -74,15 +74,15 @@ class mainWindow(Gtk.Window):
         item_counter = 0
         
         for row in range (0, number_of_rows_to_create):
-            new_row = Gtk.Box()
-            new_row.set_hexpand = False
-            new_row.set_vexpand = False
+            new_row = Gtk.HBox()
+            new_row.set_homogeneous(True)
+        
             for i in range(0,5):
                 if item_counter == len(self.list_of_items):
                     break
-                button = Gtk.Button(label = self.list_of_items[item_counter].name , expand = True)
+                button = Gtk.Button(label = self.list_of_items[item_counter].name, expand = True)
                 button.connect("clicked", self.add_to_total, self.list_of_items[item_counter])
-
+                
                 new_row.pack_start(button, True, True, 0)
                 item_counter = item_counter + 1
 
@@ -100,10 +100,7 @@ class mainWindow(Gtk.Window):
         self.grid.add(self.Box_For_Special_Buttons)
         self.grid.attach_next_to(self.scroll_bar, self.Box_For_Special_Buttons, Gtk.PositionType.RIGHT, 1,1)
         self.grid.attach_next_to(self.Box_For_Buttons, self.scroll_bar, Gtk.PositionType.RIGHT, 1, 1)
-        
-
-        self.grid.set_hexpand(False)
-        self.grid.set_vexpand(False)
+    
 
         self.add(self.grid)
         
