@@ -40,9 +40,12 @@ class settings_window(Gtk.Window):
         restore_staff_button.connect("clicked", self.restore_staff_handler, parent)
 
         restore_records_button = Gtk.Button(label = "Restore Records")
-        restore_records_button.connect("clicked", self.restore_records_handler) 
+        restore_records_button.connect("clicked", self.restore_records_handler)
 
+        exit_application_button = Gtk.Button(label = "Exit Application")
+        exit_application_button.connect("clicked", self.exit_application, parent) 
 
+        box.pack_start(exit_application_button, True, True, 0)
         box.pack_start(add_staff_button, True, True, 0)
         box.pack_start(modify_staff_button, True, True, 0)
         box.pack_start(view_records_button, True, True, 0)
@@ -51,6 +54,10 @@ class settings_window(Gtk.Window):
         box.pack_start(restore_records_button, True, True, 0)
 
         self.add(box)
+    
+    def exit_application(self, button_event, parent):
+        self.destroy()
+        parent.destroy()
 
     def restore_records_handler(self, button_event):
         try:
