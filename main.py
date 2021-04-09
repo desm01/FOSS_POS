@@ -32,7 +32,7 @@ class mainWindow(Gtk.Window):
 
         self.initalise_form()
 
-        self.resize(800, 400)
+        self.fullscreen()
         self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
 
        
