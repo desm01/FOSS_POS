@@ -9,7 +9,7 @@ from Storage.get_records import get_records
 
 
 from GUI.Records.show_all_records_window import show_all_records_window
-
+from GUI.Records.select_item import select_item
 
 class show_records(Gtk.Window):
     def __init__(self, parent):
@@ -59,7 +59,7 @@ class show_records(Gtk.Window):
         print("Shpwing for specifig date")
 
     def show_records_for_specific_item(self, button_event):
-        print("showing for specific item")
+        win = select_item()
 
     def show_records_for_specific_category(self, button_event):
         print("showing for specific category")

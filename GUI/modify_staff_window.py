@@ -14,9 +14,9 @@ class modify_staff_member_window(Gtk.Window):
 
         box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
         
-        name_label = Gtk.Label(label = "Name:")
-        self.name_entry = Gtk.Entry()
-        self.name_entry.set_text(staff.name)
+        name_label = Gtk.Label(label = "New Passcode:")
+        self.passcode_entry = Gtk.Entry()
+        self.passcode_entry.set_text(staff.passcode)
 
         gender_label = Gtk.Label(label = "Gender:")
         self.gender_entry = Gtk.Entry()
@@ -31,7 +31,7 @@ class modify_staff_member_window(Gtk.Window):
         submit_button.connect("clicked", self.on_click, staff, parent)
 
         box.pack_start(name_label, True, True, 0)
-        box.pack_start(self.name_entry, True, True, 0)
+        box.pack_start(self.passcode_entry, True, True, 0)
 
         box.pack_start(gender_label, True, True, 0)
         box.pack_start(self.gender_entry, True, True, 0)
@@ -53,12 +53,12 @@ class modify_staff_member_window(Gtk.Window):
             return True
 
     def on_click(self, button_event, old_staff, parent):
-        new_name = self.name_entry.get_text()
+        new_passcode = self.passcode_entry.get_text()
         new_gender = self.gender_entry.get_text()
         new_employee_type = self.employee_type_entry.get_text()
 
-        if self.check_if_string_is_valid(new_name, new_gender, new_employee_type):
-            old_staff.update_details(new_name, new_gender, new_employee_type)
+        if self.check_if_string_is_valid(new_passcode, new_gender, new_employee_type):
+            old_staff.update_details(new_passcode, new_gender, new_employee_type)
             store_staff(parent.list_of_staff)
             self.destroy()
         else:

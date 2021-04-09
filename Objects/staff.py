@@ -10,13 +10,13 @@ class Staff:
     def __del__(self):
         print("Employee Destroyed")
 
-    def update_details(self, new_name, new_gender, new_employee_type):
-        self.change_name(new_name)
+    def update_details(self, new_passcode, new_gender, new_employee_type):
+        self.change_passcode(new_passcode)
         self.change_gender(new_gender)
         self.change_employee_type(new_employee_type)
 
-    def change_name(self, new_name):
-        self.name = new_name
+    def change_passcode(self, new_passcode):
+        self.passcode = new_passcode
 
     def change_gender(self, new_gender):
         self.gender = new_gender

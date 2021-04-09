@@ -15,6 +15,9 @@ class show_staff_window(Gtk.Window):
 
         self.add(self.box)
 
+        self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        self.set_size_request(400,400)
+
         self.show_all()
     
     def set_up_buttons(self, parent):
