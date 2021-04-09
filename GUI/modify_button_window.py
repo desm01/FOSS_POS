@@ -4,6 +4,7 @@ gi.require_version("Gtk", "3.0")
 from Objects.item import Item
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
 from Functions.check_if_item_is_correct import check_if_new_item_is_correct
+from Storage.store_items import store_items
 
 from gi.repository import Gtk
 
@@ -38,7 +39,7 @@ class modify_button_window(Gtk.Window):
         self.item_type_category_entry.set_text(item.category)
 
         submit_button = Gtk.Button(label = "Submit")
-        submit_button.connect("clicked", self.submit_handler, self ,parent, item)
+        submit_button.connect("clicked", self.submit_handler ,parent, item)
 
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.name_entry, True, True, 0)
@@ -56,7 +57,7 @@ class modify_button_window(Gtk.Window):
 
         self.add(box)
 
-    def submit_handler(button_event, button ,  self, parent, item):
+    def submit_handler(self, button_event, parent, item):
         try:
             new_name = self.name_entry.get_text()
             new_price = float (self.price_entry.get_text())
@@ -69,6 +70,8 @@ class modify_button_window(Gtk.Window):
         
             if check_if_new_item_is_correct(new_item) == True:
                 item.update(new_item)
+                store_items(parent.list_of_items)
+
 
             else:
                 dialog = alert_messagebox("Error, the fields have been incorrectly filled out")
@@ -84,5 +87,5 @@ class modify_button_window(Gtk.Window):
 
         
 
-       # parent.render_buttons()
-            self.destroy()
+        
+        self.destroy()
