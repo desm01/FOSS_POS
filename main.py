@@ -1,3 +1,4 @@
+from os import terminal_size
 from Storage.get_staff import get_staff
 import gi
 import math
@@ -27,9 +28,11 @@ current_basket = []
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
-        
+    
 
         self.initalise_form()
+
+        self.resize(800, 400)
 
        
        
@@ -45,18 +48,22 @@ class mainWindow(Gtk.Window):
         self.sign_on = False
 
         
-        self.Box_For_Special_Buttons = Gtk.Box()
+        self.Box_For_Special_Buttons = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
 
-        self.Box_For_Total = Gtk.Box()
+        self.Box_For_Total = Gtk.VBox()
 
   
 
         
-        self.list_box = Gtk.ListBox()
+        self.list_box = Gtk.ListBox(hexpand = True, vexpand = True)
         lbl = Gtk.Label(label = "Current Basket")
         self.list_box.prepend(lbl)
         
-        self.Box_For_Total.add(self.list_box)
+        self.Box_For_Total.pack_start(self.list_box,1 ,1, 1)
+
+        self.scroll_bar = Gtk.ScrolledWindow()
+        self.scroll_bar.add_with_viewport(self.Box_For_Total)
+        
 
         self.Box_For_Buttons = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
 
@@ -70,7 +77,7 @@ class mainWindow(Gtk.Window):
             for i in range(0,5):
                 if item_counter == len(self.list_of_items):
                     break
-                button = Gtk.Button(label = self.list_of_items[item_counter].name)
+                button = Gtk.Button(label = self.list_of_items[item_counter].name, expand = True)
                 button.connect("clicked", self.add_to_total, self.list_of_items[item_counter])
 
                 new_row.pack_start(button, True, True, 0)
@@ -88,38 +95,43 @@ class mainWindow(Gtk.Window):
 
   
         self.grid.add(self.Box_For_Special_Buttons)
-        self.grid.attach_next_to(self.Box_For_Buttons, self.Box_For_Special_Buttons, Gtk.PositionType.RIGHT, 1, 1)
-        self.grid.attach_next_to(self.Box_For_Total, self.Box_For_Special_Buttons, Gtk.PositionType.BOTTOM, 2,2)
+        self.grid.attach_next_to(self.scroll_bar, self.Box_For_Special_Buttons, Gtk.PositionType.RIGHT, 1,1)
+        self.grid.attach_next_to(self.Box_For_Buttons, self.scroll_bar, Gtk.PositionType.RIGHT, 1, 1)
+        
 
-       
+        self.grid.set_hexpand(False)
+        self.grid.set_vexpand(False)
+
         self.add(self.grid)
+        
+        self.show_all()
         
         
 
 
     def initalise_settings_button(self):
-        setting_button = Gtk.Button(label = "Settings")
+        setting_button = Gtk.Button(label = "Settings", expand = True)
         setting_button.connect("clicked", self.settings_handler)
         self.Box_For_Special_Buttons.pack_start(setting_button, True, True, 0)
 
 
     def initalise_sign_on_button(self):
-        sign_on_button = Gtk.Button(label = "Sign On")
+        sign_on_button = Gtk.Button(label = "Sign On", expand = True)
         sign_on_button.connect("clicked", self.sign_on_handler)
         self.Box_For_Special_Buttons.pack_start(sign_on_button, True, True, 0)
 
     def initalise_modify_button(self):
-        modify_button = Gtk.Button(label = "Modify Item")
+        modify_button = Gtk.Button(label = "Modify Item", expand = True)
         modify_button.connect("clicked", self.modify_button_handler)
         self.Box_For_Special_Buttons.add(modify_button)
 
     def initalise_checkout_button(self):
-        checkout_button = Gtk.Button(label = "Checkout")
+        checkout_button = Gtk.Button(label = "Checkout", expand = True)
         checkout_button.connect("clicked", self.checkout_handler)
         self.Box_For_Special_Buttons.pack_start(checkout_button, True, True, 0)
 
     def initalise_add_item_button(self):
-        add_item_button = Gtk.Button(label = "Add New Item")
+        add_item_button = Gtk.Button(label = "Add New Item", expand = True)
         add_item_button.connect("clicked", self.add_new_item_handler)
         self.Box_For_Special_Buttons.pack_start(add_item_button, True, True, 0)
 
@@ -196,7 +208,7 @@ class mainWindow(Gtk.Window):
 
     def render_buttons(self):
         new_item = self.list_of_items[len(self.list_of_items) - 1]
-        new_button = Gtk.Button(label = new_item.name)
+        new_button = Gtk.Button(label = new_item.name, expand = True)
         new_button.connect("clicked", self.add_to_total, new_item )
 
         store_items(self.list_of_items)
@@ -215,10 +227,7 @@ class mainWindow(Gtk.Window):
 def start_program():
     window = mainWindow()
     window.connect("destroy", Gtk.main_quit)
-    window.show_all()
-    window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-    window.set_size_request(800,400)
-   # window.set_hexpand(False)
+   # window.show_all()
     Gtk.main()
 
 
