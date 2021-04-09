@@ -33,6 +33,7 @@ class mainWindow(Gtk.Window):
         self.initalise_form()
 
         self.resize(800, 400)
+        self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
 
        
        
@@ -74,10 +75,12 @@ class mainWindow(Gtk.Window):
         
         for row in range (0, number_of_rows_to_create):
             new_row = Gtk.Box()
+            new_row.set_hexpand = False
+            new_row.set_vexpand = False
             for i in range(0,5):
                 if item_counter == len(self.list_of_items):
                     break
-                button = Gtk.Button(label = self.list_of_items[item_counter].name, expand = True)
+                button = Gtk.Button(label = self.list_of_items[item_counter].name , expand = True)
                 button.connect("clicked", self.add_to_total, self.list_of_items[item_counter])
 
                 new_row.pack_start(button, True, True, 0)
@@ -227,7 +230,7 @@ class mainWindow(Gtk.Window):
 def start_program():
     window = mainWindow()
     window.connect("destroy", Gtk.main_quit)
-   # window.show_all()
+
     Gtk.main()
 
 
