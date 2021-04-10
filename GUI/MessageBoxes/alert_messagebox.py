@@ -2,17 +2,24 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-class alert_messagebox(Gtk.Dialog):
+class alert_messagebox(Gtk.Window):
     def __init__(self, text_to_display):
-        Gtk.Dialog.__init__(self, title = "ALERT")
+        Gtk.Window.__init__(self, title = "ALERT")
 
-        self.add_buttons(
-            Gtk.STOCK_OK, Gtk.ResponseType.OK
-        )
+        self.fullscreen()
 
         label = Gtk.Label(label = text_to_display)
+        okay_button = Gtk.Button(label = "Okay")
+        okay_button.connect("clicked", self.on_click)
 
-        self.set_default_size(250,250)
-        box = self.get_content_area()
-        box.add(label)
+        box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
+
+        box.pack_start(label, True, True, 0)
+        box.pack_start(okay_button, True, True, 0)
+
+        self.add(box)
+
         self.show_all()
+
+    def on_click(self, button_event):
+        self.destroy()

@@ -8,6 +8,9 @@ from GUI.modify_staff_window import modify_staff_member_window
 class show_staff_window(Gtk.Window):
     def __init__(self, parent):
         Gtk.Window.__init__(self, title = "Show Staff Members")
+        
+        self.fullscreen()
+        
         self.box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
 
         label = Gtk.Label(label = "Select the member of staff you wish to modify")

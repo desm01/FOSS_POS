@@ -61,4 +61,4 @@ class select_staff_window(Gtk.Window):
             self.box_for_staff.pack_start(button, True, True, 0)
 
     def on_click_handler(self, button_event, staff_member):
-        win = show_records_for_staff(staff_member)
+        show_records_for_staff(staff_member)

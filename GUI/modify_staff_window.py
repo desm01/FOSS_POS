@@ -46,8 +46,8 @@ class modify_staff_member_window(Gtk.Window):
         box.pack_start(self.employee_type_entry, True, True, 0)
 
         hBox = Gtk.Box()
-        hBox.pack_start(back_button, True, True, 0)
-        hBox.pack_start(submit_button, True, True, 0)
+        hBox.pack_start(back_button, True, True, 25)
+        hBox.pack_start(submit_button, True, True, 25)
 
         box.pack_start(hBox, True, True, 0)
 

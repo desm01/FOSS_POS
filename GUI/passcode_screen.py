@@ -6,6 +6,9 @@ class passcode_screen(Gtk.Window):
     def __init__(self, parent, staff_member):
         Gtk.Window.__init__(self, title = "Enter Passcode")
 
+        self.fullscreen()
+        self.set_border_width(25)
+
         self.current_code = ""
         self.label = Gtk.Label("Current Code: " + self.current_code)
 
@@ -39,23 +42,31 @@ class passcode_screen(Gtk.Window):
         Box_For_Zero.pack_start(minus_button, True, True, 0)
 
 
-
-        submit_button = Gtk.Button(label = "Submit", expand = True)
-        submit_button.connect("clicked", self.submit_handler, parent, staff_member)
-
+        bottom_row = Gtk.Box()
 
         
+        submit_button = Gtk.Button(label = "Submit", expand = True)
+        submit_button.connect("clicked", self.submit_handler, parent, staff_member)
+        back_button = Gtk.Button(label = "Back", expand = True)
+        back_button.connect("clicked", self.back_handler, parent)
+
+        bottom_row.pack_start(back_button, True, True, 0)
+        bottom_row.pack_start(submit_button, True, True, 0)
+
         grid = Gtk.Grid()
         grid.add(self.label)
         grid.attach_next_to(Box_For_Top_Row, self.label, Gtk.PositionType.BOTTOM, 1, 1)
         grid.attach_next_to(Box_For_Middle_Row, Box_For_Top_Row, Gtk.PositionType.BOTTOM, 1 , 1)
         grid.attach_next_to(Box_For_Bottom_Row, Box_For_Middle_Row, Gtk.PositionType.BOTTOM, 1 , 1)
         grid.attach_next_to(Box_For_Zero ,Box_For_Bottom_Row, Gtk.PositionType.BOTTOM, 1 , 1)
-        grid.attach_next_to(submit_button, Box_For_Zero, Gtk.PositionType.BOTTOM, 1 ,1)
+        grid.attach_next_to(bottom_row, Box_For_Zero, Gtk.PositionType.BOTTOM, 1 ,1)
         self.resize(400,380)
         self.add(grid)
        
         self.show_all()
+    
+    def back_handler(self, button_event, parent):
+        self.destroy()
 
     def minus_button_click(self, button_event, parent):
         text = self.current_code

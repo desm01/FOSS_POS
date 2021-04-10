@@ -10,6 +10,8 @@ from gi.repository import Gtk
 class sign_on_screen(Gtk.Window):
     def __init__(self, parent):
         Gtk.Window.__init__(self, title = "Sign On Screen")
+        
+        self.fullscreen()
         self.box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
         list_of_staff = parent.list_of_staff
 

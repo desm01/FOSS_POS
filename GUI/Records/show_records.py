@@ -47,19 +47,19 @@ class show_records(Gtk.Window):
     
 
     def show_all_records(self, button_event):
-        win = show_all_records_window()
+        show_all_records_window()
 
     def show_records_for_today(self, button_event):
-        win = show_todays_records_window()
+        show_todays_records_window()
 
     def show_records_for_staff_member(self, button_event):
-        win = select_staff_window()
+         select_staff_window()
 
     def show_records_for_specific_date(self, button_event):
         print("Shpwing for specifig date")
 
     def show_records_for_specific_item(self, button_event):
-        win = select_item()
+        select_item()
 
     def show_records_for_specific_category(self, button_event):
         print("showing for specific category")

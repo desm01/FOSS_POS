@@ -79,20 +79,19 @@ class settings_window(Gtk.Window):
             dialog.destroy()
         except:
             self.destroy()
-            dialog = alert_messagebox("Error, records have already been destroyed")
-            response = dialog.run()
-            dialog.destroy()
+            alert_messagebox("Error, records have already been destroyed")
+
 
     def view_records_handler(self, button_event, parent):
-        try:
+        if (os.path.isfile('records_dump.pkl')):
             window = show_records(parent)
             window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
             window.show_all()
             self.destroy()
-        except:
-            dialog = alert_messagebox("Error, there are no records to view")
-            response = dialog.run()
-            dialog.destroy()
+        else:
+            alert_messagebox("Error, there are no records to view")
+            self.destroy()
+            
     
     def add_staff_handler(self, button_event, parent):
         window = add_staff_member_window(parent)
