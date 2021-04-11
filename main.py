@@ -39,7 +39,9 @@ class mainWindow(Gtk.Window):
 
        
        
-
+    def re_render_form(self):
+        self.grid.destroy()
+        self.initalise_form()
 
     def initalise_form(self):
         
@@ -82,6 +84,7 @@ class mainWindow(Gtk.Window):
             for i in range(0,5):
                 if item_counter == len(self.list_of_items):
                     break
+              #  if self.list_of_items[item_counter].visible == True:
                 button = Gtk.Button(label = self.list_of_items[item_counter].name, expand = True)
                 button.connect("clicked", self.add_to_total, self.list_of_items[item_counter])
                 

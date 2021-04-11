@@ -11,6 +11,7 @@ from GUI.add_staff_member_window import add_staff_member_window
 from GUI.show_staff_window import show_staff_window
 from GUI.Records.show_records import show_records
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
+from GUI.show_item_window import show_item_window
 
 from Storage.store_items import default_store_items
 from Storage.store_staff import default_store_staff
@@ -51,17 +52,25 @@ class settings_window(Gtk.Window):
         exit_application_button = Gtk.Button(label = "Exit Application")
         exit_application_button.connect("clicked", self.exit_application, parent) 
 
+        delete_item_button = Gtk.Button(label = "Delete Item")
+        delete_item_button.connect("clicked", self.delete_item_handler, parent)
 
         box.pack_start(exit_application_button, True, True, 0)
         box.pack_start(add_staff_button, True, True, 0)
         box.pack_start(modify_staff_button, True, True, 0)
         box.pack_start(view_records_button, True, True, 0)
+        box.pack_start(delete_item_button, True, True, 0)
         box.pack_start(restore_items_button, True, True, 0)
         box.pack_start(restore_staff_button, True, True, 0)
         box.pack_start(restore_records_button, True, True, 0)
         box.pack_start(back_button, True, True, 0)
 
         self.add(box)
+
+    def delete_item_handler(self, button_event, parent):
+        window = show_item_window(parent)
+        window.show_all()
+        self.destroy()
     
     def back_handler(self, button_event):
         self.destroy()
@@ -74,9 +83,7 @@ class settings_window(Gtk.Window):
         try:
             os.remove("records_dump.pkl")
             self.destroy()
-            dialog = alert_messagebox("Records have been destroyed")
-            response = dialog.run()
-            dialog.destroy()
+            alert_messagebox("Records have been destroyed")
         except:
             self.destroy()
             alert_messagebox("Error, records have already been destroyed")
@@ -108,10 +115,12 @@ class settings_window(Gtk.Window):
 
     def restore_item_handler(self, button_event, parent):
         default_store_items()
+        
+        parent.re_render_form()
         self.destroy()
-        parent.restart()
 
     def restore_staff_handler(self, button_event, parent):
         default_store_staff()
+        
+        parent.re_render_form()
         self.destroy()
-        parent.restart()

@@ -48,3 +48,4 @@ GUI/Records/__pycache__/select_staff_window.cpython-38.pyc
 GUI/Records/__pycache__/select_item.cpython-38.pyc
 GUI/Records/__pycache__/show_records_where_item_window.cpython-38.pyc
 Queries/__pycache__/show_records_where_item_was_purchased.cpython-38.pyc
+GUI/__pycache__/add_item_window.cpython-38.pyc
