@@ -28,8 +28,10 @@ current_basket = []
 class mainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "EPOS Software")
-    
 
+
+        self.total = 0
+       
         self.initalise_form()
 
         self.fullscreen()
@@ -163,9 +165,8 @@ class mainWindow(Gtk.Window):
             self.current_user = staff_member
             print ("User: " + staff_member.name + " has signed on")
         else:
-            dialog = wrong_passcode_screen()
-            response = dialog.run()
-            dialog.destroy()
+            wrong_passcode_screen()
+            
         
 
     def checkout_handler(self, button_event):
@@ -178,9 +179,8 @@ class mainWindow(Gtk.Window):
             self.clear_list_box()
             current_basket.clear()
         else:
-            dialog = not_signed_on()
-            response = dialog.run()
-            dialog.destroy()
+            not_signed_on()
+            
 
     def clear_list_box(self):
         for item in self.list_box:
@@ -190,21 +190,47 @@ class mainWindow(Gtk.Window):
         self.list_box.add(label)
         self.show_all()
 
-    def add_to_list_box(self, item_to_be_added):
-        label = Gtk.Label(label = item_to_be_added )
-        self.list_box.insert(label, -1)
-        self.show_all()
+    def add_to_list_box(self, item_to_be_added, total_details):
+        total_label = Gtk.Label(label = total_details)
+
+        if(len (self.list_box) > 2):
+
+            list_of_labels = self.list_box.get_children()
+            final_index = len(list_of_labels) - 1
+            label_to_be_removed = list_of_labels[final_index]
+            
+
+            self.list_box.remove(label_to_be_removed)
+            
+            label = Gtk.Label(label = item_to_be_added )
+
+            
+            
+
+
+            self.list_box.insert(label, -1)
+            self.list_box.insert(total_label,-1 )
+            self.show_all()
+        else:
+            label = Gtk.Label(label = item_to_be_added )
+            self.list_box.insert(label, -1)
+            self.list_box.insert(total_label, -1)
+            self.show_all()
+
 
     def add_to_total(self, button_event, item):
         if self.sign_on:
             current_basket.append(item)
+            self.total = self.total + item.price
+
+            total_details = "£" + "{:.2f}".format(self.total)
             item_details = str(item.price) + "  " + item.name
-            self.add_to_list_box(item_details)
+            self.add_to_list_box(item_details, total_details)
+
  
         else:
-            dialog = not_signed_on()
-            response = dialog.run()
-            dialog.destroy()
+            not_signed_on()
+            
 
     def render_buttons(self):
         new_item = self.list_of_items[len(self.list_of_items) - 1]
@@ -214,10 +240,10 @@ class mainWindow(Gtk.Window):
         store_items(self.list_of_items)
 
         self.grid.destroy()
-        #self.Box_For_Buttons = Gtk.Box()
-        self.initalise_form() #.pack_start(new_button, True, True, 0)
+    
+        self.initalise_form() 
         self.show_all()
-      #  self.destroy()
+  
 
     def restart(self):
         self.destroy()
