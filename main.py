@@ -177,7 +177,6 @@ class mainWindow(Gtk.Window):
         if self.sign_on:
             checkout(current_basket)
             new_purchase = Purchase(current_basket, self.staff_member, self.staff_member)
-           # new_purchase.record_item()
             
             self.clear_list_box()
             current_basket.clear()
@@ -202,14 +201,9 @@ class mainWindow(Gtk.Window):
             final_index = len(list_of_labels) - 1
             label_to_be_removed = list_of_labels[final_index]
             
-
             self.list_box.remove(label_to_be_removed)
             
             label = Gtk.Label(label = item_to_be_added )
-
-            
-            
-
 
             self.list_box.insert(label, -1)
             self.list_box.insert(total_label,-1 )
@@ -248,16 +242,11 @@ class mainWindow(Gtk.Window):
         self.show_all()
   
 
-    def restart(self):
-        self.destroy()
-        start_program()
 
 
-def start_program():
-    window = mainWindow()
-    window.connect("destroy", Gtk.main_quit)
+window = mainWindow()
+window.connect("destroy", Gtk.main_quit)
 
-    Gtk.main()
+Gtk.main()
 
 
-start_program()
