@@ -18,6 +18,7 @@ from GUI.sign_on_screen import sign_on_screen
 from GUI.MessageBoxes.wrong_passcode_screen import wrong_passcode_screen
 from GUI.MessageBoxes.not_signed_on import not_signed_on
 from GUI.settings_window import settings_window
+from GUI.show_items_in_basket import show_items_in_basket
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -100,6 +101,7 @@ class mainWindow(Gtk.Window):
         self.initalise_add_item_button()
         self.initalise_checkout_button()
         self.initalise_settings_button()
+        self.initalise_remove_from_basket_button()
 
   
         self.grid.add(self.Box_For_Special_Buttons)
@@ -111,7 +113,11 @@ class mainWindow(Gtk.Window):
         
         self.show_all()
         
-        
+    
+    def initalise_remove_from_basket_button(self):
+        remove_from_basket_button = Gtk.Button(label = "Remove From Basket")
+        remove_from_basket_button.connect("clicked", self.remove_from_basket_handler)
+        self.Box_For_Special_Buttons.pack_start(remove_from_basket_button, True, True, 0)
 
 
     def initalise_settings_button(self):
@@ -170,6 +176,17 @@ class mainWindow(Gtk.Window):
         else:
             wrong_passcode_screen()
             
+
+    def remove_from_basket(self, item_to_remove):
+        for item in current_basket:
+            if item == item_to_remove:
+                current_basket.remove(item)
+                break
+
+        self.render_list_box()
+
+    def remove_from_basket_handler(self, button_event):
+        show_items_in_basket(self, current_basket)
         
 
     def checkout_handler(self, button_event):
@@ -183,6 +200,17 @@ class mainWindow(Gtk.Window):
         else:
             not_signed_on()
             
+
+    def render_list_box(self):
+        self.clear_list_box()
+
+        basket = current_basket.copy()
+        current_basket.clear()
+        self.total = 0
+
+        for item in basket:
+            self.add_to_total("", item)
+        
 
     def clear_list_box(self):
         for item in self.list_box:
