@@ -10,7 +10,7 @@ class show_items_in_basket(Gtk.Window):
 
         box = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
 
-        if len(box) == 0:
+        if len(current_basket) == 0:
             label = Gtk.Label(label = "Sorry there are no items in the basket")
             box.pack_start(label, True, True, 0)
 

@@ -217,6 +217,7 @@ class mainWindow(Gtk.Window):
             self.list_box.remove(item)
         
         label = Gtk.Label(label = "Current Basket:")
+        self.total = 0
         self.list_box.add(label)
         self.show_all()
 
