@@ -12,6 +12,8 @@ from GUI.show_staff_window import show_staff_window
 from GUI.Records.show_records import show_records
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
 from GUI.show_item_window import show_item_window
+from GUI.add_customer_window import add_customer_window
+
 
 from Storage.store_items import default_store_items
 from Storage.store_staff import default_store_staff
@@ -30,6 +32,9 @@ class settings_window(Gtk.Window):
 
         back_button = Gtk.Button(label = "Back")
         back_button.connect("clicked", self.back_handler)
+
+        add_customer_button = Gtk.Button(label = "Add Customer")
+        add_customer_button.connect("clicked", self.add_customer_handler, parent)
 
         add_staff_button = Gtk.Button(label = "Add Staff Member")
         add_staff_button.connect("clicked", self.add_staff_handler, parent)
@@ -56,6 +61,7 @@ class settings_window(Gtk.Window):
         delete_item_button.connect("clicked", self.delete_item_handler, parent)
 
         box.pack_start(exit_application_button, True, True, 0)
+        box.pack_start(add_customer_button, True, True, 0)
         box.pack_start(add_staff_button, True, True, 0)
         box.pack_start(modify_staff_button, True, True, 0)
         box.pack_start(view_records_button, True, True, 0)
@@ -66,6 +72,13 @@ class settings_window(Gtk.Window):
         box.pack_start(back_button, True, True, 0)
 
         self.add(box)
+
+
+    def add_customer_handler(self, button_event, parent):
+        window = add_customer_window()
+        window.show_all()
+        self.destroy()
+
 
     def delete_item_handler(self, button_event, parent):
         window = show_item_window(parent)

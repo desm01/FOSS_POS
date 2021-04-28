@@ -113,7 +113,7 @@ class mainWindow(Gtk.Window):
         
         self.show_all()
         
-    
+
     def initalise_remove_from_basket_button(self):
         remove_from_basket_button = Gtk.Button(label = "Remove From Basket")
         remove_from_basket_button.connect("clicked", self.remove_from_basket_handler)

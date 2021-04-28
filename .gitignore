@@ -50,3 +50,5 @@ GUI/Records/__pycache__/show_records_where_item_window.cpython-38.pyc
 Queries/__pycache__/show_records_where_item_was_purchased.cpython-38.pyc
 GUI/__pycache__/add_item_window.cpython-38.pyc
 GUI/__pycache__/show_items_in_basket.cpython-38.pyc
+GUI/__pycache__/add_customer_window.cpython-38.pyc
+GUI/__pycache__/add_item_window.cpython-38.pyc
