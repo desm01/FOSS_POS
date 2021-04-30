@@ -8,7 +8,7 @@ from Functions.display_checkout import display_checkout
 
 from GUI.MessageBoxes.checkout_window import checkout_window
 from GUI.add_customer_window import add_customer_window
-
+from GUI.select_customer_window import select_customer_window
 
 
 def check_if_customer_has_account():
@@ -40,7 +40,7 @@ def checkout(item_list):
 
     
     if response == Gtk.ResponseType.YES:
-        display_checkout(item_list)
+        select_customer_window(item_list)
 
         
     

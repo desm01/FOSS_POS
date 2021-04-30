@@ -1,8 +1,9 @@
 class Customer:
 
-    def __init__(self, name, address, date_of_birth, email_address, phone_number):
+    def __init__(self, name, address, postcode, date_of_birth, email_address, phone_number):
         self.name = name
         self.address = address
+        self.postcode = postcode
         self.date_of_birth = date_of_birth
         self.email_address = email_address
         self.phone_number = phone_number

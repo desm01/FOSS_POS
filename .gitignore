@@ -58,3 +58,4 @@ Storage/__pycache__/store_customers.cpython-38.pyc
 GUI/MessageBoxes/__pycache__/ask_customer_to_make_account_window.cpython-38.pyc
 GUI/MessageBoxes/__pycache__/check_if_customer_has_account_window.cpython-38.pyc
 Functions/__pycache__/display_checkout.cpython-38.pyc
+GUI/__pycache__/select_customer_window.cpython-38.pyc

@@ -24,7 +24,7 @@ def add_new_customer(new_customer):
 def default_store_customers():
     file_name = "customer_dump.pkl"
 
-    customer = Customer("Des", "27 Fake Street", "1929/01/28", "des@email.com", "4356463")
+    customer = Customer("Des", "27 Fake Street","BP04WQ" ,"1929/01/28", "des@email.com", "4356463")
     item_list = [customer]
 
     open_file = open(file_name, "wb")

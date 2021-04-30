@@ -97,13 +97,12 @@ class mainWindow(Gtk.Window):
 
 
         self.initalise_sign_on_button()
+        self.initalise_checkout_button()
         self.initalise_modify_button()
         self.initalise_add_item_button()
-        self.initalise_checkout_button()
-        self.initalise_settings_button()
         self.initalise_remove_from_basket_button()
         self.initalise_clear_basket_button()
-
+        self.initalise_settings_button()
   
         self.grid.add(self.Box_For_Special_Buttons)
         self.grid.attach_next_to(self.scroll_bar, self.Box_For_Special_Buttons, Gtk.PositionType.RIGHT, 1,1)

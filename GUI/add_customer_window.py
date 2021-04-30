@@ -36,6 +36,9 @@ class add_customer_window(Gtk.Window):
         address_label = Gtk.Label(label = "Address:")
         self.address_entry = Gtk.Entry()
 
+        postcode_label = Gtk.Label(label = "Postcode:")
+        self.postcode_entry = Gtk.Entry()
+
         date_of_birth_label = Gtk.Label(label = "Date Of Birth:")
         self.date_of_birth_entry = Gtk.Entry()
 
@@ -79,6 +82,7 @@ class add_customer_window(Gtk.Window):
 
         customer_name = self.name_entry.get_text()
         address = self.address_entry.get_text()
+        postcode = self.postcode_entry.get_text()
         date_of_birth = self.date_of_birth_entry.get_text()
         email_address = self.email_entry.get_text()
         phone_number = self.phone_number_entry.get_text()
@@ -86,7 +90,7 @@ class add_customer_window(Gtk.Window):
         if self.check_date_of_birth(date_of_birth):
             if self.check_phone_number_is_correct(phone_number):
 
-                new_customer = Customer(customer_name, address, date_of_birth, email_address, phone_number)
+                new_customer = Customer(customer_name, address, postcode, date_of_birth, email_address, phone_number)
                 add_new_customer(new_customer)
                 
                 print(list_of_items)
