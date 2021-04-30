@@ -1,9 +1,8 @@
 import pickle
 
+def get_customers():
 
-def get_records():
-
-    file_name = "records_dump.pkl"
+    file_name = "customer_dump.pkl"
     open_file = open(file_name, "rb")
     loaded_list = pickle.load(open_file)
     open_file.close()

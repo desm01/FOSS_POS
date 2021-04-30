@@ -2,6 +2,12 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from Storage.store_customers import add_new_customer
+from Objects.customer import Customer
+import datetime
+import re
+
+
 class add_customer_window(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title = "Add Customer")
@@ -57,5 +63,35 @@ class add_customer_window(Gtk.Window):
     def back_handler(self, button_event):
         self.destroy()
 
-    def submit_handler(self):
-        print("Submitting")
+    def submit_handler(self, button_event):
+
+        customer_name = self.name_entry.get_text()
+        address = self.address_entry.get_text()
+        date_of_birth = self.date_of_birth_entry.get_text()
+        email_address = self.email_entry.get_text()
+        phone_number = self.phone_number_entry.get_text()
+
+        if self.check_date_of_birth(date_of_birth):
+            if self.check_phone_number_is_correct(phone_number):
+
+                new_customer = Customer(customer_name, address, date_of_birth, email_address, phone_number)
+                add_new_customer(new_customer)
+                print("Submitting")
+
+                self.destroy()
+
+    def check_date_of_birth(self, date_of_birth):
+        try:
+            datetime.datetime.strptime(date_of_birth, '%Y-%m-%d')
+            return True
+        except ValueError:
+            return False
+            #raise ValueError("Incorrect data format, should be YYYY-MM-DD")
+            
+
+    def check_phone_number_is_correct(self, phone_number):
+
+        for i in range (0, len(phone_number)):
+            if not re.match("[0-9]", phone_number[i]):
+                return False
+        return True 

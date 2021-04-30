@@ -1,4 +1,4 @@
-from Objects.item import Item
+
 from Storage.get_records import get_records 
 import pickle
 

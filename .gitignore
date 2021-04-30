@@ -52,3 +52,6 @@ GUI/__pycache__/add_item_window.cpython-38.pyc
 GUI/__pycache__/show_items_in_basket.cpython-38.pyc
 GUI/__pycache__/add_customer_window.cpython-38.pyc
 GUI/__pycache__/add_item_window.cpython-38.pyc
+Objects/__pycache__/customer.cpython-38.pyc
+Storage/__pycache__/get_customers.cpython-38.pyc
+Storage/__pycache__/store_customers.cpython-38.pyc
