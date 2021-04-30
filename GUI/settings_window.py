@@ -75,8 +75,8 @@ class settings_window(Gtk.Window):
 
 
     def add_customer_handler(self, button_event, parent):
-        window = add_customer_window()
-        window.show_all()
+    #    window = add_customer_window()
+     #   window.show_all()
         self.destroy()
 
 

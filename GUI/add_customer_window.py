@@ -1,18 +1,30 @@
+from Storage.store_records import record_transaction
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from Functions.display_checkout import display_checkout
+
 from Storage.store_customers import add_new_customer
 from Objects.customer import Customer
+from Objects.item import Item
+
 import datetime
 import re
 
 
-class add_customer_window(Gtk.Window):
-    def __init__(self):
-        Gtk.Window.__init__(self, title = "Add Customer")
 
+class add_customer_window(Gtk.Window):
+
+    def __init__(self, item_list):
+        Gtk.Window.__init__(self, title = "Add Customer",)
+        
+    
+        self.list_of_items = []
+        self.list_of_items += item_list
         self.fullscreen()
+       
+        
 
         box = Gtk.Box(spacing = 10, orientation = Gtk.Orientation.VERTICAL)
 
@@ -37,7 +49,7 @@ class add_customer_window(Gtk.Window):
         back_button.connect("clicked", self.back_handler)
 
         submit_button = Gtk.Button(label = "Submit")
-        submit_button.connect("clicked", self.submit_handler)
+        submit_button.connect("clicked", self.submit_handler, self.list_of_items)
 
         box.pack_start(name_label, True, True, 0)
         box.pack_start(self.name_entry, True, True, 0)
@@ -63,7 +75,7 @@ class add_customer_window(Gtk.Window):
     def back_handler(self, button_event):
         self.destroy()
 
-    def submit_handler(self, button_event):
+    def submit_handler(self, button_event, list_of_items):
 
         customer_name = self.name_entry.get_text()
         address = self.address_entry.get_text()
@@ -76,7 +88,12 @@ class add_customer_window(Gtk.Window):
 
                 new_customer = Customer(customer_name, address, date_of_birth, email_address, phone_number)
                 add_new_customer(new_customer)
-                print("Submitting")
+                
+                print(list_of_items)
+
+                if len(list_of_items) > 0:
+                    display_checkout(list_of_items)
+                    
 
                 self.destroy()
 

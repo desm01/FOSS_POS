@@ -202,8 +202,8 @@ class mainWindow(Gtk.Window):
     def checkout_handler(self, button_event):
 
         if self.sign_on:
-            checkout(current_basket)
-            new_purchase = Purchase(current_basket, self.staff_member, self.staff_member)
+            checkout( current_basket)
+         #   new_purchase = Purchase(current_basket, self.staff_member, self.staff_member)
             
             self.clear_list_box()
             current_basket.clear()
