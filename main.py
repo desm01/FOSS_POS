@@ -68,7 +68,7 @@ class mainWindow(Gtk.Window):
         self.Box_For_Total.pack_start(self.list_box,1 ,1, 1)
 
         self.scroll_bar = Gtk.ScrolledWindow()
-        self.scroll_bar.add_with_viewport(self.Box_For_Total)
+        self.scroll_bar.add(self.Box_For_Total)
         
 
         self.Box_For_Buttons = Gtk.Box(spacing = 0, orientation = Gtk.Orientation.VERTICAL)
@@ -102,6 +102,7 @@ class mainWindow(Gtk.Window):
         self.initalise_checkout_button()
         self.initalise_settings_button()
         self.initalise_remove_from_basket_button()
+        self.initalise_clear_basket_button()
 
   
         self.grid.add(self.Box_For_Special_Buttons)
@@ -113,6 +114,10 @@ class mainWindow(Gtk.Window):
         
         self.show_all()
         
+    def initalise_clear_basket_button(self):
+        clear_basket_button = Gtk.Button(label = "Clear Basket")
+        clear_basket_button.connect("clicked", self.clear_basket_handler)
+        self.Box_For_Special_Buttons.pack_start(clear_basket_button, True, True, 0)
 
     def initalise_remove_from_basket_button(self):
         remove_from_basket_button = Gtk.Button(label = "Remove From Basket")
@@ -145,6 +150,11 @@ class mainWindow(Gtk.Window):
         add_item_button = Gtk.Button(label = "Add New Item", expand = True)
         add_item_button.connect("clicked", self.add_new_item_handler)
         self.Box_For_Special_Buttons.pack_start(add_item_button, True, True, 0)
+
+    def clear_basket_handler(self, button_event):
+        self.clear_list_box()
+        current_basket.clear()
+        self.re_render_form()
 
     def settings_handler(self, button_event):
         self.settings_window = settings_window(self)
@@ -215,6 +225,8 @@ class mainWindow(Gtk.Window):
     def clear_list_box(self):
         for item in self.list_box:
             self.list_box.remove(item)
+
+        
         
         label = Gtk.Label(label = "Current Basket:")
         self.total = 0
