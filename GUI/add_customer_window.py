@@ -47,9 +47,14 @@ class add_customer_window(Gtk.Window):
 
         phone_number_label = Gtk.Label(label = "Phone Number:")
         self.phone_number_entry = Gtk.Entry()
+        
+        hBox = Gtk.Box()
 
-        back_button = Gtk.Button(label = "Back")
-        back_button.connect("clicked", self.back_handler)
+        
+        if len (item_list) == 0:
+            back_button = Gtk.Button(label = "Back")
+            back_button.connect("clicked", self.back_handler)
+            hBox.pack_start(back_button, True, True, 0)
 
         submit_button = Gtk.Button(label = "Submit")
         submit_button.connect("clicked", self.submit_handler, self.list_of_items)
@@ -65,9 +70,7 @@ class add_customer_window(Gtk.Window):
         box.pack_start(phone_number_label, True, True, 0)
         box.pack_start(self.phone_number_entry, True, True, 0)
 
-        hBox = Gtk.Box()
-
-        hBox.pack_start(back_button, True, True, 0)
+      
         hBox.pack_start(submit_button, True, True, 0)
 
         box.pack_start(hBox, True, True, 0)
