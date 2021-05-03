@@ -15,6 +15,7 @@ from Functions.checkout import checkout
 from GUI.add_item_window import add_item_window
 from GUI.show_buttons_window import show_buttons_window
 from GUI.sign_on_screen import sign_on_screen
+from GUI.MessageBoxes.alert_messagebox import alert_messagebox
 from GUI.MessageBoxes.wrong_passcode_screen import wrong_passcode_screen
 from GUI.MessageBoxes.not_signed_on import not_signed_on
 from GUI.settings_window import settings_window
@@ -65,7 +66,7 @@ class mainWindow(Gtk.Window):
         lbl = Gtk.Label(label = "Current Basket")
         self.list_box.prepend(lbl)
         
-        self.Box_For_Total.pack_start(self.list_box,1 ,1, 1)
+        self.Box_For_Total.pack_start(self.list_box,1 ,1, 0)
 
         self.scroll_bar = Gtk.ScrolledWindow()
         self.scroll_bar.add(self.Box_For_Total)
@@ -151,9 +152,15 @@ class mainWindow(Gtk.Window):
         self.Box_For_Special_Buttons.pack_start(add_item_button, True, True, 0)
 
     def clear_basket_handler(self, button_event):
-        self.clear_list_box()
-        current_basket.clear()
-        self.re_render_form()
+        if len(current_basket) == 0:
+            window = alert_messagebox("Sorry, your basket is empty")
+           # window.show_all()
+
+        else:
+
+            self.clear_list_box()
+            current_basket.clear()
+            self.re_render_form()
 
     def settings_handler(self, button_event):
         self.settings_window = settings_window(self)
