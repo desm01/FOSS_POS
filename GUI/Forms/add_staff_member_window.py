@@ -2,8 +2,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-from Storage.store_staff import store_staff
-from Objects.staff import Staff
+from Functions.add_staff_member import add_staff_member
 
 class add_staff_member_window(Gtk.Window):
     def __init__(self, parent):
@@ -68,16 +67,5 @@ class add_staff_member_window(Gtk.Window):
         self.destroy()
 
     def on_click(self, button_event, parent):
-        name = self.name_entry.get_text()
-        date_of_birth = self.date_of_birth_entry.get_text()
-        gender = self.gender_entry.get_text()
-        employee_type = self.employee_type_entry.get_text()
-        passcode = self.passcode_entry.get_text()
+        add_staff_member(self, parent)
 
-        new_staff_member = Staff(name, date_of_birth, gender, employee_type, passcode)
-
-        parent.list_of_staff.append(new_staff_member)
-
-        store_staff(parent.list_of_staff)
-
-        self.destroy()

@@ -1,4 +1,4 @@
-from GUI.add_customer_window import add_customer_window
+from GUI.Forms.add_customer_window import add_customer_window
 from re import T
 import gi
 gi.require_version("Gtk", "3.0")

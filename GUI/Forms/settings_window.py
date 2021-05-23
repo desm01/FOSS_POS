@@ -7,12 +7,12 @@ gi.require_version("Gtk", "3.0")
 from Objects.item import Item
 from Objects.staff import Staff
 
-from GUI.add_staff_member_window import add_staff_member_window
-from GUI.show_staff_window import show_staff_window
+from GUI.Forms.add_staff_member_window import add_staff_member_window
+from GUI.Forms.show_staff_window import show_staff_window
 from GUI.Records.show_records import show_records
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
-from GUI.show_item_window import show_item_window
-from GUI.add_customer_window import add_customer_window
+from GUI.Forms.show_item_window import show_item_window
+from GUI.Forms.add_customer_window import add_customer_window
 
 
 from Storage.store_items import default_store_items

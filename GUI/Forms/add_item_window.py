@@ -1,5 +1,5 @@
 from GUI.MessageBoxes.alert_messagebox import alert_messagebox
-from Functions.check_if_item_is_correct import check_if_new_item_is_correct
+from Functions.add_new_item import add_new_item
 import gi
 gi.require_version("Gtk", "3.0")
 
@@ -8,7 +8,7 @@ from Objects.item import Item
 
 from gi.repository import Gtk
 
-from Storage.store_items import store_items
+
 
 
 class add_item_window(Gtk.Window):
@@ -70,35 +70,8 @@ class add_item_window(Gtk.Window):
         self.destroy()
 
     def submit_handler(self,button_event, parent, list_of_items):
-
-            name = self.name_entry.get_text()
-            price = float (self.price_entry.get_text())
-            quantity = float(self.quantity_entry.get_text())
-            plu_number = float(self.plu_number_entry.get_text())
-            item_type = self.item_type_entry.get_text()
-            item_category = self.item_type_category_entry.get_text()
-
-            if (self.check_if_item_already_exists( parent, name)):
-                print("Item already exists")
-        
-            else:
-                new_item = Item(name, price, quantity, plu_number, item_type, item_category)
-                if check_if_new_item_is_correct(new_item):
-                    parent.list_of_items.append(new_item)
-                    parent.render_buttons()
-
-
+        add_new_item(self, parent)
 
             
-
-            self.destroy()
-
-
-    def check_if_item_already_exists(self, parent, name_of_item):
-        for item in parent.list_of_items:
-            if name_of_item == item.name:
-                return True
-
-        return False
 
 

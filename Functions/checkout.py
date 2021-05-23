@@ -7,8 +7,8 @@ from gi.repository import Gtk
 from Functions.display_checkout import display_checkout
 
 from GUI.MessageBoxes.checkout_window import checkout_window
-from GUI.add_customer_window import add_customer_window
-from GUI.select_customer_window import select_customer_window
+from GUI.Forms.add_customer_window import add_customer_window
+from GUI.Forms.select_customer_window import select_customer_window
 
 
 def check_if_customer_has_account():
@@ -54,4 +54,5 @@ def checkout(item_list):
             display_checkout(item_list)
 
         print("he")
+
 
