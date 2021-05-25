@@ -1,5 +1,5 @@
 from Objects.item import Item
-from GUI.MessageBoxes.alert_messagebox import alert_messagebox
+from Objects.alert import alert_messagebox
 from Functions.add_new_item import check_if_new_item_is_correct
 from Storage.store_items import store_items
 

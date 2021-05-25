@@ -2,6 +2,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from Functions.sign_on import check_code_is_correct
+
 class passcode_screen(Gtk.Window):
     def __init__(self, parent, staff_member):
         Gtk.Window.__init__(self, title = "Enter Passcode")
@@ -82,7 +84,7 @@ class passcode_screen(Gtk.Window):
         self.label.set_text("Current Code: " + text)
 
     def submit_handler(self, button_event, parent, staff_member):
-        parent.user_has_signed_on( staff_member, self.current_code)
+        check_code_is_correct(parent, staff_member, self.current_code)
         self.destroy() 
 
         

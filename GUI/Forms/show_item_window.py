@@ -31,5 +31,5 @@ class show_item_window(Gtk.Window):
         
         parent.list_of_items.remove(item)
         item.make_invisible()
-        parent.render_buttons()
+        parent.re_render_form()
         self.destroy()

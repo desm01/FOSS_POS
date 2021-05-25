@@ -9,8 +9,8 @@ from Objects.staff import Staff
 
 from GUI.Forms.add_staff_member_window import add_staff_member_window
 from GUI.Forms.show_staff_window import show_staff_window
-from GUI.Records.show_records import show_records
-from GUI.MessageBoxes.alert_messagebox import alert_messagebox
+
+from Objects.alert import alert_messagebox
 from GUI.Forms.show_item_window import show_item_window
 from GUI.Forms.add_customer_window import add_customer_window
 
@@ -129,11 +129,11 @@ class settings_window(Gtk.Window):
     def restore_item_handler(self, button_event, parent):
         default_store_items()
         
-        parent.re_render_form()
+        parent.render_form()
         self.destroy()
 
     def restore_staff_handler(self, button_event, parent):
         default_store_staff()
         
-        parent.re_render_form()
+        parent.render_form()
         self.destroy()

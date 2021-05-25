@@ -69,6 +69,7 @@ class add_customer_window(Gtk.Window):
         box.pack_start(hBox, True, True, 0)
 
         self.add(box)
+        self.show_all()
 
 
     def back_handler(self, button_event):

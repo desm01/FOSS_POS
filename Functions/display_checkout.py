@@ -1,4 +1,4 @@
-from GUI.MessageBoxes.checkout_window import checkout_window
+from Objects.alert import alert_messagebox
 
 def display_checkout(item_list):
     if (len(item_list) == 0):
@@ -20,4 +20,4 @@ def format_text_for_checkout(item_list):
     return string
 
 def run_checkout_window(checkout_text):
-    checkout_window(checkout_text)
+    alert_messagebox(checkout_text)

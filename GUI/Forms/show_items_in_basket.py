@@ -2,6 +2,8 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
+from Functions.remove_item_from_basket import remove_item_from_basket
+
 class show_items_in_basket(Gtk.Window):
     def __init__(self, parent, current_basket):
         Gtk.Window.__init__(self, title = "Select Item To Remove From Basket")
@@ -14,15 +16,15 @@ class show_items_in_basket(Gtk.Window):
             self.show_default_message(box)
 
         else:
-            self.display_buttons(current_basket, parent, box)
+            self.display_buttons(current_basket, box, parent)
 
 
         self.add(box)
 
         self.show_all()
 
-    def on_click(self, button_event, parent, item):
-        parent.remove_from_basket(item)
+    def on_click(self, button_event, item, parent):
+        remove_item_from_basket(parent, item)
         self.destroy()
 
     def back_handler(self, button_event):
@@ -37,8 +39,8 @@ class show_items_in_basket(Gtk.Window):
 
         box.pack_start(back_button, True, True, 0)
 
-    def display_buttons(self, current_basket, parent, box):
+    def display_buttons(self, current_basket, box, parent):
         for item in current_basket:
             button = Gtk.Button(label = item.name)
-            button.connect("clicked", self.on_click, parent, item)
+            button.connect("clicked", self.on_click, item, parent)
             box.pack_start(button, True, True, 0)

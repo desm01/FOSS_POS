@@ -1,4 +1,4 @@
-from GUI.MessageBoxes.alert_messagebox import alert_messagebox
+
 from Functions.add_new_item import add_new_item
 import gi
 gi.require_version("Gtk", "3.0")

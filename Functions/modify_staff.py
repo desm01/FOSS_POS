@@ -1,7 +1,7 @@
 from Objects.staff import Staff
 from Storage.store_staff import store_staff
 
-from GUI.MessageBoxes.alert_messagebox import alert_messagebox
+from Objects.alert import alert_messagebox
 
 def check_if_string_is_valid(name, gender, employee_type):
     if len(name) < 1 or len(gender) < 1 or len(employee_type) < 1:

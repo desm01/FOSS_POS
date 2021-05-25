@@ -83,3 +83,11 @@ GUI/Forms/__pycache__/show_items_in_basket.cpython-38.pyc
 GUI/Forms/__pycache__/show_staff_window.cpython-38.pyc
 GUI/Forms/__pycache__/sign_on_screen.cpython-38.pyc
 Functions/__pycache__/add_new_item.cpython-38.pyc
+Functions/__pycache__/add_new_item.cpython-38.pyc
+Functions/__pycache__/remove_item_from_basket.cpython-38.pyc
+Objects/__pycache__/column.cpython-38.pyc
+Objects/__pycache__/button.cpython-38.pyc
+Objects/__pycache__/alert.cpython-38.pyc
+Functions/__pycache__/add_item_to_total.cpython-38.pyc
+GUI/__pycache__/main_form.cpython-38.pyc
+Objects/__pycache__/message_box.cpython-38.pyc

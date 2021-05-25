@@ -2,11 +2,9 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-from GUI import build_main_form
+from GUI import main_form
         
-window = build_main_form
-
-window.build_main_form()
+main_form.build_main_form()
 
 
 Gtk.main()

@@ -1,4 +1,5 @@
 from Objects.item import Item
+from Storage.store_items import store_items
 
 def check_if_fields_are_filled_in(new_item):
     if len(new_item.name) < 1 or len(new_item.itemType) < 1 or len(new_item.category) < 1:
@@ -40,7 +41,10 @@ def add_new_item(self, parent):
         new_item = Item(name, price, quantity, plu_number, item_type, item_category)
         if check_if_new_item_is_correct(new_item):
             parent.list_of_items.append(new_item)
-            parent.render_buttons()
+
+            store_items(parent.list_of_items)
+
+            parent.render_form()
 
 
 
