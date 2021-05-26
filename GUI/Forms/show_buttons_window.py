@@ -6,7 +6,7 @@ from Objects.item import Item
 
 from gi.repository import Gtk
 
-from Functions.initalise_buttons import initalise_buttons
+from Functions.create_item_buttons import create_item_buttons
 
 from GUI.Forms.modify_button_window import modify_button_window
 
@@ -21,7 +21,8 @@ class show_buttons_window(Gtk.Window):
         self.set_up_buttons(parent)
 
     def set_up_buttons(self, parent):
-        self.add(initalise_buttons(parent, self.on_button_click))
+        buttons = create_item_buttons(parent, self.on_button_click)
+        self.add(buttons)
         
         self.show_all()
 

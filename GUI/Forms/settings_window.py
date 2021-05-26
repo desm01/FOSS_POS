@@ -14,7 +14,6 @@ from Objects.alert import alert_messagebox
 from GUI.Forms.show_item_window import show_item_window
 from GUI.Forms.add_customer_window import add_customer_window
 
-
 from Storage.store_items import default_store_items
 from Storage.store_staff import default_store_staff
 
@@ -104,9 +103,10 @@ class settings_window(Gtk.Window):
 
     def view_records_handler(self, button_event, parent):
         if (os.path.isfile('records_dump.pkl')):
-            window = show_records(parent)
-            window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-            window.show_all()
+            print ("Coming soon")
+            #window = show_records(parent)
+            #window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+            #window.show_all()
             self.destroy()
         else:
             alert_messagebox("Error, there are no records to view")
@@ -129,6 +129,8 @@ class settings_window(Gtk.Window):
     def restore_item_handler(self, button_event, parent):
         default_store_items()
         
+
+        parent.fetch_items_and_staff()
         parent.render_form()
         self.destroy()
 

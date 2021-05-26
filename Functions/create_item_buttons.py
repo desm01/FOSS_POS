@@ -4,7 +4,7 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-def initalise_buttons(parent, event):
+def create_item_buttons(parent, event):
     number_of_rows_to_create = len(parent.list_of_items)
     number_of_rows_to_create = math.ceil(number_of_rows_to_create / 5)
 

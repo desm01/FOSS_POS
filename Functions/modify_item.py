@@ -17,7 +17,7 @@ def modify_item(self, parent, item):
         if check_if_new_item_is_correct(new_item) == True:
             item.update(new_item)
             store_items(parent.list_of_items)
-            parent.render_buttons()
+            parent.render_form()
 
 
         else:
@@ -27,8 +27,6 @@ def modify_item(self, parent, item):
 
 
     except:
-        dialog = alert_messagebox("Error, the items have been incorrectly formated")
-        response = dialog.run()
-        dialog.destroy()
+        alert_messagebox("Error, the items have been incorrectly formated")
 
     self.destroy()
