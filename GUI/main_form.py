@@ -47,6 +47,14 @@ class build_main_form(Gtk.Window):
         self.list_of_items = get_items()
         self.list_of_staff = get_staff()
        
+    def clear_basket(self):
+        self.current_basket = []
+
+        self.total = 0
+        self.fullscreen()
+
+        self.list_of_items = get_items()
+        self.list_of_staff = get_staff()
 
     def render_form(self):
         try:
