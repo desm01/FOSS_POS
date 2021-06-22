@@ -33,6 +33,6 @@ def checkout(item_list):
         if response == Gtk.ResponseType.YES:
             add_customer_window(item_list)
         else:
-            alert_messagebox(item_list)
+            display_checkout(item_list)
 
 

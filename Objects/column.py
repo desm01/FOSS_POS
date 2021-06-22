@@ -6,7 +6,7 @@ from gi.repository import Gtk
 class Column:
 
     def __init__(self, orientation):
-        self.box = Gtk.Box(spacing = 0, orientation = orientation)
+        self.box = Gtk.Box(spacing = 0, orientation = orientation, hexpand = True, vexpand = True)
 
     def add(self, item):
         self.box.pack_start(item, True, True, 0)
